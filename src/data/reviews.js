@@ -1,49 +1,51 @@
-// ⚠️ PLATZHALTER — BITTE DURCH ECHTE GOOGLE-BEWERTUNGEN ERSETZEN.
-// Dies sind Beispiel-Einträge, damit die Sektion vollständig aussieht.
-// Vor dem Live-Gang: Name, Sternzahl (rating), Text und Datum durch die
-// echten Google-Bewertungen ersetzen und `summary` (Schnitt + Anzahl)
-// an das reale Google-Profil anpassen.
+// Echte Google-Bewertungen der Dätwyler Küchenbau + Schreinerei AG
+// (öffentlich auf dem Google-Unternehmensprofil gepostet).
+//
+// Hinweis zu `count`: Ich konnte die Gesamtzahl der Google-Bewertungen nicht
+// verifizieren — hier stehen die 5 vorliegenden. Bitte an die echte
+// Gesamtzahl auf eurem Google-Profil anpassen (rating ggf. ebenfalls).
 export const reviewsSummary = {
-  rating: 4.9, // Durchschnitt laut Google — anpassen
-  count: 48, // Anzahl Bewertungen — anpassen
-  profileUrl: 'https://www.google.com/maps/search/?api=1&query=D%C3%A4twyler+K%C3%BCchenbau+Schreinerei+Strengelbach',
+  rating: 5.0,
+  count: 6,
+  profileUrl:
+    'https://www.google.com/maps/search/?api=1&query=D%C3%A4twyler+K%C3%BCchenbau+Schreinerei+Strengelbach',
 };
 
 export const reviews = [
   {
-    name: 'Beispiel — bitte ersetzen',
-    rating: 5,
-    date: 'vor 2 Monaten',
-    text: 'Von der Planung bis zur Montage alles top. Unsere neue Küche passt auf den Millimeter und das Team war jederzeit erreichbar.',
-  },
-  {
-    name: 'Beispiel — bitte ersetzen',
-    rating: 5,
-    date: 'vor 3 Monaten',
-    text: 'Sehr saubere und präzise Arbeit. Der Einbauschrank nutzt die Dachschräge perfekt aus. Gerne wieder.',
-  },
-  {
-    name: 'Beispiel — bitte ersetzen',
+    name: 'Sabrina H.',
     rating: 5,
     date: 'vor 5 Monaten',
-    text: 'Kompetente Beratung, faire Offerte und ein Ergebnis, das uns jeden Tag Freude macht. Absolut empfehlenswert.',
+    text: 'Super Arbeit! Ein sehr kompetentes, sympathisches und unkompliziertes Team – unsere Küche und die Einbauschränke sind wunderschön geworden. Vielen Dank :-)',
   },
   {
-    name: 'Beispiel — bitte ersetzen',
+    name: 'Andrea Schmid',
     rating: 5,
-    date: 'vor 6 Monaten',
-    text: 'Termine wurden exakt eingehalten, die Montage war sauber und speditiv. Ein Handwerksbetrieb, wie man ihn sich wünscht.',
+    date: 'vor einem Jahr',
+    text: 'Ein Jahr nach Küchenrenovation: Absolut nichts zu beanstanden, perfekte sorgfältige Arbeit. So, wie ich es mir vorgestellt hatte, und erst noch bezahlbar. Top Mitarbeiter.',
   },
   {
-    name: 'Beispiel — bitte ersetzen',
+    name: 'Michelle Bäuerle',
     rating: 5,
-    date: 'vor 8 Monaten',
-    text: 'Massgefertigter Esstisch aus Eiche — wunderschöne Verarbeitung. Man merkt die Liebe zum Detail.',
+    date: 'vor 5 Monaten',
+    text: 'Wunderschöne passende und massgeschreinerte Garderobe, Esstisch, Wandmöbel sowie Anpassungen in der Küche mit professioneller und kompetenter Beratung. Vielen Dank, weitere Aufträge für unser Zuhause folgen.',
   },
   {
-    name: 'Beispiel — bitte ersetzen',
+    name: 'Vanessa Hofer',
     rating: 5,
-    date: 'vor 10 Monaten',
-    text: 'Freundlich, zuverlässig und handwerklich top. Die Badmöbel sind genau nach unseren Wünschen entstanden.',
+    date: 'vor 5 Monaten',
+    text: 'Wir haben wunderschöne Küchen und Einbauschränke bekommen. Super Beratung, das Dätwyler Team hat uns top Vorschläge gemacht und wir sind mit den Arbeiten mehr als zufrieden. Danke!',
+  },
+  {
+    name: 'Luca Haefeli',
+    rating: 5,
+    date: 'vor 5 Monaten',
+    text: 'Wir arbeiten seit längerer Zeit mit der Firma Dätwyler zusammen und schätzen die unkomplizierte und zuverlässige Zusammenarbeit.',
+  },
+  {
+    name: 'Marco Geri Gerlach',
+    rating: 5,
+    date: 'vor 3 Monaten',
+    text: 'Diese Schreinerei kann ich wärmstens weiterempfehlen. Vom Erstkontakt bis zur Montage und Abnahme einfach Top.',
   },
 ];
