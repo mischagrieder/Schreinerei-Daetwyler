@@ -7,13 +7,13 @@ import Reveal from './Reveal';
 
 export default function CtaBand() {
   return (
-    <section aria-labelledby="cta-heading" className="relative overflow-hidden bg-accent">
+    <section aria-labelledby="cta-heading" className="relative overflow-hidden bg-secondary">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.07]"
+        className="pointer-events-none absolute inset-0 opacity-[0.06]"
         style={{
           backgroundImage:
-            'repeating-linear-gradient(45deg, #000 0, #000 1px, transparent 1px, transparent 14px)',
+            'repeating-linear-gradient(45deg, #fff 0, #fff 1px, transparent 1px, transparent 14px)',
         }}
       />
       <div className="relative mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 px-6 py-16 lg:flex-row lg:items-center lg:py-20">
@@ -30,7 +30,7 @@ export default function CtaBand() {
           </p>
         </Reveal>
         <Reveal delay={0.15} className="flex shrink-0 flex-col gap-3 sm:flex-row lg:flex-col xl:flex-row">
-          <Button asChild size="lg" className="group rounded-sm bg-secondary px-7 font-bold text-white hover:bg-black">
+          <Button asChild size="lg" className="group rounded-sm bg-accent px-7 font-bold text-white hover:bg-accent/90">
             <Link to="/kontakt">
               Offerte anfragen
               <ArrowRight size={17} className="ml-2 transition-transform group-hover:translate-x-1" aria-hidden="true" />
@@ -40,7 +40,7 @@ export default function CtaBand() {
             asChild
             size="lg"
             variant="outline"
-            className="rounded-sm border-2 border-white bg-transparent px-7 font-bold text-white hover:bg-white hover:text-accent"
+            className="rounded-sm border-2 border-white bg-transparent px-7 font-bold text-white hover:bg-white hover:text-secondary"
           >
             <a href={`tel:${company.phoneIntl}`}>
               <Phone size={17} className="mr-2" aria-hidden="true" />
