@@ -74,7 +74,7 @@ export default function GoogleReviews() {
             <div>
               <Stars rating={reviewsSummary.rating} className="h-5 w-5" />
               <p className="mt-1 text-left text-xs text-white/55">
-                aus {reviewsSummary.count} Bewertungen
+                Sterne auf Google
               </p>
             </div>
           </div>

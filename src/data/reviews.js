@@ -1,12 +1,10 @@
 // Echte Google-Bewertungen der Dätwyler Küchenbau + Schreinerei AG
 // (öffentlich auf dem Google-Unternehmensprofil gepostet).
-//
-// Hinweis zu `count`: Ich konnte die Gesamtzahl der Google-Bewertungen nicht
-// verifizieren — hier stehen die 5 vorliegenden. Bitte an die echte
-// Gesamtzahl auf eurem Google-Profil anpassen (rating ggf. ebenfalls).
+// Die Sektion zeigt den Schnitt (4.9 Sterne); die Anzahl wird bewusst
+// nicht angezeigt. `count` bleibt hier nur zur Info hinterlegt.
 export const reviewsSummary = {
   rating: 4.9, // Gesamtschnitt laut Google-Profil
-  count: 6,
+  count: 15,
   profileUrl:
     'https://www.google.com/maps/search/?api=1&query=D%C3%A4twyler+K%C3%BCchenbau+Schreinerei+Strengelbach',
 };
