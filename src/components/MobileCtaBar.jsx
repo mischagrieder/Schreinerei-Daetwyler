@@ -1,14 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Phone, FileText, MessageCircle } from 'lucide-react';
 import { company } from '@/data/company';
+import { cn } from '@/lib/utils';
 
 export default function MobileCtaBar({ onChat, hidden }) {
   const { pathname } = useLocation();
+  const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setShow(window.scrollY > 500);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   if (pathname === '/kontakt' || hidden) return null;
 
   return (
-    <div className="fixed bottom-4 left-1/2 z-40 flex -translate-x-1/2 items-center gap-1 rounded-full border border-white/10 bg-secondary/90 p-1.5 shadow-2xl shadow-black/40 backdrop-blur-md lg:hidden">
+    <div
+      className={cn(
+        'fixed bottom-4 left-1/2 z-40 flex -translate-x-1/2 items-center gap-1 rounded-full border border-white/10 bg-secondary/90 p-1.5 shadow-2xl shadow-black/40 backdrop-blur-md transition-all duration-300 lg:hidden',
+        show ? 'translate-y-0 opacity-100' : 'pointer-events-none translate-y-4 opacity-0'
+      )}
+    >
       <a
         href={`tel:${company.phoneIntl}`}
         className="flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-bold text-white transition-colors active:bg-white/10"
