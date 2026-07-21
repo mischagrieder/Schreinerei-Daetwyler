@@ -142,7 +142,7 @@ function WarumDaetwyler() {
   ];
 
   return (
-    <section className="mx-auto max-w-7xl px-6 py-24 lg:py-32">
+    <section className="mx-auto max-w-7xl px-6 py-14 lg:py-20">
       <div className="grid items-center gap-6 lg:grid-cols-2 lg:gap-14">
         <Reveal className="relative">
           <img
@@ -182,7 +182,7 @@ function WarumDaetwyler() {
 
 function LeistungenGrid() {
   return (
-    <section className="bg-muted py-24 lg:py-32">
+    <section className="bg-muted py-14 lg:py-20">
       <div className="mx-auto max-w-7xl px-6">
         <div className="mb-14 flex flex-wrap items-end justify-between gap-6">
           <SectionHeading
@@ -245,7 +245,7 @@ function ProjekteTeaser() {
   ].filter(Boolean);
 
   return (
-    <section className="mx-auto max-w-7xl px-6 py-24 lg:py-32">
+    <section className="mx-auto max-w-7xl px-6 py-14 lg:py-20">
       <div className="mb-14 flex flex-wrap items-end justify-between gap-6">
         <SectionHeading
           kicker="Referenzen"
@@ -321,32 +321,52 @@ function Prozess() {
   ];
 
   return (
-    <section className="mx-auto max-w-7xl px-6 py-24 lg:py-32">
+    <section className="mx-auto max-w-7xl px-6 py-14 lg:py-20">
       <SectionHeading
         center
         kicker="So arbeiten wir"
         title="In vier Schritten zu Ihrem Projekt"
         text="Klar geregelt, persönlich betreut: So kommen Sie ohne Umwege von der ersten Idee zum fertigen Ergebnis."
-        className="mb-16"
+        className="mb-12"
       />
-      <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-        {steps.map((s, i) => (
-          <Reveal key={s.nr} delay={i * 0.1} className="group relative rounded-sm border border-border bg-white p-7 transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-xl">
-            <span className="font-display text-5xl font-black text-muted-foreground/15 transition-colors group-hover:text-accent/15">
-              {s.nr}
-            </span>
-            <s.icon size={26} className="mt-4 text-accent" strokeWidth={1.75} aria-hidden="true" />
-            <h3 className="mt-4 font-display text-lg font-bold text-foreground">{s.title}</h3>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.text}</p>
-            {i < steps.length - 1 && (
-              <ArrowRight
-                size={20}
-                className="absolute -right-4 top-1/2 z-10 hidden -translate-y-1/2 text-accent lg:block"
-                aria-hidden="true"
-              />
-            )}
-          </Reveal>
-        ))}
+      <div className="relative mx-auto max-w-3xl">
+        {/* geschwungene „Schnur" von oben nach unten */}
+        <div
+          className="absolute left-8 top-4 bottom-4 w-0.5 bg-gradient-to-b from-accent via-accent/50 to-accent/20 md:left-1/2 md:-translate-x-1/2"
+          aria-hidden="true"
+        />
+        <div className="space-y-8 md:space-y-2">
+          {steps.map((s, i) => {
+            const isLeft = i % 2 === 0;
+            return (
+              <Reveal
+                key={s.nr}
+                delay={i * 0.08}
+                className={`relative md:flex md:min-h-[150px] md:items-center ${isLeft ? 'md:justify-start' : 'md:justify-end'}`}
+              >
+                {/* Knoten mit Schritt-Nummer auf der Schnur */}
+                <span className="absolute left-8 top-1 z-10 flex h-14 w-14 -translate-x-1/2 items-center justify-center rounded-full bg-accent font-display text-lg font-black text-white shadow-lg ring-8 ring-background md:left-1/2 md:top-1/2 md:-translate-y-1/2">
+                  {s.nr}
+                </span>
+                {/* Karte, abwechselnd links/rechts */}
+                <div
+                  className={`ml-20 rounded-sm border border-border bg-white p-6 shadow-sm transition-all duration-300 hover:border-accent hover:shadow-lg md:ml-0 md:w-[calc(50%-3rem)] ${
+                    isLeft ? 'md:mr-auto md:text-right' : 'md:ml-auto'
+                  }`}
+                >
+                  <s.icon
+                    size={24}
+                    className={`block text-accent ${isLeft ? 'md:ml-auto' : ''}`}
+                    strokeWidth={1.75}
+                    aria-hidden="true"
+                  />
+                  <h3 className="mt-3 font-display text-lg font-bold text-foreground">{s.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.text}</p>
+                </div>
+              </Reveal>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
@@ -354,7 +374,7 @@ function Prozess() {
 
 function NachhaltigkeitBand() {
   return (
-    <section className="relative overflow-hidden bg-secondary py-24 text-white lg:py-32">
+    <section className="relative overflow-hidden bg-secondary py-14 text-white lg:py-20">
       <div className="absolute inset-0">
         <img
           src={min(images.gebaeudeSolar)}
@@ -399,7 +419,7 @@ function NachhaltigkeitBand() {
 
 function TeamTeaser() {
   return (
-    <section className="mx-auto max-w-7xl px-6 py-24 lg:py-32">
+    <section className="mx-auto max-w-7xl px-6 py-14 lg:py-20">
       <div className="grid items-center gap-6 lg:grid-cols-2 lg:gap-14">
         <div className="order-2 lg:order-1">
           <SectionHeading
@@ -440,7 +460,7 @@ function TeamTeaser() {
 
 function PartnerBand() {
   return (
-    <section className="border-t border-border bg-white py-14" aria-label="Unsere Partner und Lieferanten">
+    <section className="border-t border-border bg-white py-10" aria-label="Unsere Partner und Lieferanten">
       <div className="mx-auto max-w-7xl px-6">
         <p className="text-center text-xs font-bold uppercase tracking-[0.22em] text-muted-foreground">
           Wir arbeiten mit führenden Marken

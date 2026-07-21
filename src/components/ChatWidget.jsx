@@ -81,17 +81,6 @@ export default function ChatWidget({ open, setOpen }) {
 
   return (
     <>
-      {/* Launcher (Desktop) — auf Mobile sitzt der Chat-Button in der CTA-Pille */}
-      {!open && (
-        <button
-          onClick={() => setOpen(true)}
-          aria-label="Chat öffnen"
-          className="fixed bottom-6 right-6 z-40 hidden h-14 w-14 items-center justify-center rounded-full bg-accent text-white shadow-2xl shadow-black/30 transition-transform hover:scale-105 lg:flex"
-        >
-          <MessageCircle size={24} />
-        </button>
-      )}
-
       {/* Panel */}
       {open && (
         <div

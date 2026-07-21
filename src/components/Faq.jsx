@@ -21,7 +21,7 @@ const faqJsonLd = {
 
 export default function Faq() {
   return (
-    <section className="bg-muted py-24 lg:py-32" aria-labelledby="faq-heading">
+    <section className="bg-muted py-14 lg:py-20" aria-labelledby="faq-heading">
       <Helmet>
         <script type="application/ld+json">{JSON.stringify(faqJsonLd)}</script>
       </Helmet>

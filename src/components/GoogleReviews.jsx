@@ -62,7 +62,7 @@ export default function GoogleReviews() {
   const track = [...reviews, ...reviews]; // verdoppelt für nahtlose Schleife
 
   return (
-    <section className="relative overflow-hidden bg-secondary py-20 lg:py-24" aria-labelledby="reviews-heading">
+    <section className="relative overflow-hidden bg-secondary py-14 lg:py-16" aria-labelledby="reviews-heading">
       <div className="mx-auto max-w-7xl px-6">
         <Reveal className="flex flex-col items-center gap-4 text-center">
           <div className="flex items-center gap-3">
