@@ -21,7 +21,7 @@ export default function Layout() {
       <CtaBand />
       <Footer />
       <MobileCtaBar />
-      <div className="h-12 lg:hidden" aria-hidden="true" />
+      <div className="h-24 lg:hidden" aria-hidden="true" />
     </div>
   );
 }

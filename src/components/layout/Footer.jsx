@@ -16,8 +16,7 @@ export default function Footer() {
             Küchenbau · Schreinerei
           </p>
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/60">
-            Seit 1989 fertigen wir Küchen, Möbel und Innenausbauten nach Mass — mit einem kleinen, topmotivierten Team
-            und Strom aus der eigenen Solaranlage.
+            Seit 1989 fertigen wir Küchen, Möbel und Innenausbauten nach Mass — mit einem kleinen, topmotivierten Team.
           </p>
           <a
             href={company.instagram}
