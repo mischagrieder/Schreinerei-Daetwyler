@@ -474,8 +474,8 @@ export default function HomePage() {
       <LeistungenGrid />
       <ProjekteTeaser />
       <Prozess />
-      <NachhaltigkeitBand />
       <TeamTeaser />
+      <NachhaltigkeitBand />
       <Faq />
       <PartnerBand />
     </>
