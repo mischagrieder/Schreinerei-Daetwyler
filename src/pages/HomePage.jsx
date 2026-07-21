@@ -55,8 +55,8 @@ function Hero() {
             das <span className="text-accent">bleibt.</span>
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/80">
-            Küchen, Möbel und Innenausbau nach Mass — geplant, gefertigt und montiert von unserem Team in Strengelbach.
-            Fachlich kompetent, exakt und speditiv, mit transparenten Kosten.
+            Massgefertigte Küchen, Möbel und Innenausbauten – mit höchster Präzision geplant, gefertigt und montiert.
+            Qualität, auf die Sie sich verlassen können.
           </p>
           <div className="mt-9 flex flex-wrap items-center gap-4">
             <Button asChild size="lg" className="group rounded-sm bg-accent px-8 py-6 text-base font-bold text-white hover:bg-accent/90">
