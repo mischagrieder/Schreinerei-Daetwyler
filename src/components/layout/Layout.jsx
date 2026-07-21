@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 import CtaBand from '@/components/CtaBand';
 import MobileCtaBar from '@/components/MobileCtaBar';
+import ChatWidget from '@/components/ChatWidget';
 
 export default function Layout() {
+  const [chatOpen, setChatOpen] = useState(false);
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <a
@@ -20,7 +22,8 @@ export default function Layout() {
       </main>
       <CtaBand />
       <Footer />
-      <MobileCtaBar />
+      <MobileCtaBar onChat={() => setChatOpen(true)} hidden={chatOpen} />
+      <ChatWidget open={chatOpen} setOpen={setChatOpen} />
       <div className="h-24 lg:hidden" aria-hidden="true" />
     </div>
   );
