@@ -143,7 +143,7 @@ function WarumDaetwyler() {
 
   return (
     <section className="mx-auto max-w-7xl px-6 py-24 lg:py-32">
-      <div className="grid items-center gap-14 lg:grid-cols-2">
+      <div className="grid items-center gap-6 lg:grid-cols-2 lg:gap-14">
         <Reveal className="relative">
           <img
             src={min(images.haendeDetail)}
@@ -400,7 +400,7 @@ function NachhaltigkeitBand() {
 function TeamTeaser() {
   return (
     <section className="mx-auto max-w-7xl px-6 py-24 lg:py-32">
-      <div className="grid items-center gap-14 lg:grid-cols-2">
+      <div className="grid items-center gap-6 lg:grid-cols-2 lg:gap-14">
         <div className="order-2 lg:order-1">
           <SectionHeading
             kicker="Das Team"
