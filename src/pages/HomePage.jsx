@@ -18,6 +18,7 @@ import Seo, { localBusinessJsonLd } from '@/components/Seo';
 import Reveal from '@/components/Reveal';
 import SectionHeading from '@/components/SectionHeading';
 import Faq from '@/components/Faq';
+import GoogleReviews from '@/components/GoogleReviews';
 import { company, stats, partners } from '@/data/company';
 import { leistungen } from '@/data/leistungen';
 import { projekte } from '@/data/projekte';
@@ -469,6 +470,7 @@ export default function HomePage() {
       <Hero />
       <MarqueeBand />
       <WarumDaetwyler />
+      <GoogleReviews />
       <LeistungenGrid />
       <ProjekteTeaser />
       <Prozess />
