@@ -26,7 +26,7 @@ export const stats = [
   { value: '35+', label: 'Jahre Erfahrung' },
   { value: '13', label: 'Fachleute im Team' },
   { value: '1000+', label: 'realisierte Projekte' },
-  { value: '100%', label: 'Solarstrom aus eigener Anlage' },
+  { value: '4.9★', label: 'Bewertung auf Google' },
 ];
 
 export const history = [
