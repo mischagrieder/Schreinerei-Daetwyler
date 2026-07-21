@@ -1,5 +1,4 @@
 # deploy-Branch — fertig gebaute Website (nicht bearbeiten)
 
-Enthält nur die kompilierte, statische Website im Wurzelverzeichnis, für
-direktes Static-Hosting auf Hostinger ohne Build-Schritt.
-Quellcode/Entwicklung: Branch `main`.
+Nur die kompilierte, statische Website im Wurzelverzeichnis, für direktes
+Static-Hosting auf Hostinger ohne Build-Schritt. Quellcode: Branch `main`.
