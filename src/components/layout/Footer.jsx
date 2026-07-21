@@ -3,18 +3,23 @@ import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, Instagram, Clock } from 'lucide-react';
 import { company } from '@/data/company';
 import { leistungen } from '@/data/leistungen';
+import logo from '@/assets/daetwyler-logo.png';
 
 export default function Footer() {
   return (
     <footer className="bg-secondary text-white">
       <div className="mx-auto grid max-w-7xl gap-12 px-6 py-16 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <p className="font-display text-2xl font-extrabold tracking-tight">
-            Dätwyler<span className="text-accent">.</span>
-          </p>
-          <p className="mt-1 text-xs font-bold uppercase tracking-[0.18em] text-white/50">
-            Küchenbau · Schreinerei
-          </p>
+          <Link to="/" aria-label="Zur Startseite" className="inline-flex rounded-sm bg-white p-3">
+            <img
+              src={logo}
+              alt="Dätwyler Küchenbau & Schreinerei AG"
+              className="h-10 w-auto"
+              width="225"
+              height="100"
+              loading="lazy"
+            />
+          </Link>
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/60">
             Seit 1989 fertigen wir Küchen, Möbel und Innenausbauten nach Mass — mit einem kleinen, topmotivierten Team.
           </p>
