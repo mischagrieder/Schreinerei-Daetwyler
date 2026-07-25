@@ -184,13 +184,13 @@ function LeistungCard({ l, className = '' }) {
   return (
     <Link
       to={`/leistungen/${l.slug}`}
-      className={`group relative block shrink-0 overflow-hidden rounded-sm bg-secondary ${className}`}
+      className={`group relative block aspect-[4/5] h-[52vh] shrink-0 overflow-hidden rounded-sm bg-white/5 sm:h-[58vh] lg:h-[64vh] ${className}`}
     >
       <img
         src={min(images[l.heroImg])}
         alt={l.teaser}
         loading="lazy"
-        className="aspect-[4/5] w-full object-cover opacity-90 transition-all duration-500 group-hover:scale-105 group-hover:opacity-70"
+        className="h-full w-full object-cover opacity-90 transition-all duration-500 group-hover:scale-105 group-hover:opacity-70"
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
       <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6">
@@ -212,11 +212,16 @@ function LeistungCard({ l, className = '' }) {
 const leistungHeading = (
   <div className="mb-8 flex flex-wrap items-end justify-between gap-6">
     <SectionHeading
+      dark
       kicker="Unsere Leistungen"
       title="Was wir für Sie bauen"
       text="Neun Bereiche, ein Anspruch: Massarbeit, die exakt zu Ihrem Raum und Ihrem Leben passt."
     />
-    <Button asChild variant="outline" className="group rounded-sm border-foreground/25 font-bold">
+    <Button
+      asChild
+      variant="outline"
+      className="group rounded-sm border-2 border-white/30 bg-transparent font-bold text-white hover:border-white hover:bg-white hover:text-secondary"
+    >
       <Link to="/leistungen">
         Alle Leistungen
         <ArrowRight size={16} className="ml-2 transition-transform group-hover:translate-x-1" aria-hidden="true" />
@@ -227,7 +232,6 @@ const leistungHeading = (
 
 // Linkes/rechtes Gutter, das mit dem zentrierten max-w-7xl-Container fluchtet.
 const GUTTER = 'w-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))]';
-const CARD_W = 'w-[80vw] sm:w-[52vw] md:w-[40vw] lg:w-[30vw] xl:w-[24rem]';
 
 function LeistungenGrid() {
   const sectionRef = useRef(null);
@@ -303,11 +307,11 @@ function LeistungenGrid() {
   // Fallback bei „reduzierter Bewegung": normaler horizontaler Wisch-Scroller.
   if (reduce) {
     return (
-      <section className="bg-muted py-14 lg:py-20">
+      <section className="bg-secondary py-14 lg:py-20">
         <div className="mx-auto max-w-7xl px-6">{leistungHeading}</div>
         <div className="flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-4">
           {leistungen.map((l) => (
-            <LeistungCard key={l.slug} l={l} className={`snap-start ${CARD_W}`} />
+            <LeistungCard key={l.slug} l={l} className="snap-start" />
           ))}
         </div>
       </section>
@@ -315,13 +319,13 @@ function LeistungenGrid() {
   }
 
   return (
-    <section ref={sectionRef} className="relative bg-muted">
+    <section ref={sectionRef} className="relative bg-secondary">
       <div className="sticky top-0 flex h-screen flex-col justify-center gap-8 overflow-hidden py-12">
         <div className="mx-auto w-full max-w-7xl px-6">{leistungHeading}</div>
         <div ref={trackRef} className="flex will-change-transform">
           <div className={`shrink-0 ${GUTTER}`} aria-hidden="true" />
           {leistungen.map((l) => (
-            <LeistungCard key={l.slug} l={l} className={`mr-5 ${CARD_W}`} />
+            <LeistungCard key={l.slug} l={l} className="mr-5" />
           ))}
           <div className={`shrink-0 ${GUTTER}`} aria-hidden="true" />
         </div>
