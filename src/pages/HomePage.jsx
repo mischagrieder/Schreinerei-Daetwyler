@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
@@ -180,55 +180,126 @@ function WarumDaetwyler() {
   );
 }
 
-function LeistungenGrid() {
+function LeistungCard({ l, className = '' }) {
   return (
-    <section className="bg-muted py-14 lg:py-20">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="mb-14 flex flex-wrap items-end justify-between gap-6">
-          <SectionHeading
-            kicker="Unsere Leistungen"
-            title="Was wir für Sie bauen"
-            text="Neun Bereiche, ein Anspruch: Massarbeit, die exakt zu Ihrem Raum und Ihrem Leben passt."
-          />
-          <Reveal delay={0.1}>
-            <Button asChild variant="outline" className="group rounded-sm border-foreground/25 font-bold">
-              <Link to="/leistungen">
-                Alle Leistungen
-                <ArrowRight size={16} className="ml-2 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-              </Link>
-            </Button>
-          </Reveal>
+    <Link
+      to={`/leistungen/${l.slug}`}
+      className={`group relative block shrink-0 overflow-hidden rounded-sm bg-secondary ${className}`}
+    >
+      <img
+        src={min(images[l.heroImg])}
+        alt={l.teaser}
+        loading="lazy"
+        className="aspect-[4/5] w-full object-cover opacity-90 transition-all duration-500 group-hover:scale-105 group-hover:opacity-70"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+      <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6">
+        <div>
+          <h3 className="font-display text-2xl font-extrabold text-white">{l.title}</h3>
+          <p className="mt-1 line-clamp-2 max-w-xs text-sm text-white/70">{l.teaser}</p>
         </div>
+        <span
+          className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-sm transition-all duration-300 group-hover:bg-accent"
+          aria-hidden="true"
+        >
+          <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-0.5" />
+        </span>
+      </div>
+    </Link>
+  );
+}
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {leistungen.map((l, i) => (
-            <Reveal key={l.slug} delay={(i % 3) * 0.08}>
-              <Link
-                to={`/leistungen/${l.slug}`}
-                className="group relative block overflow-hidden rounded-sm bg-secondary"
-              >
-                <img
-                  src={min(images[l.heroImg])}
-                  alt={l.teaser}
-                  loading="lazy"
-                  className="aspect-[4/3] w-full object-cover opacity-90 transition-all duration-500 group-hover:scale-105 group-hover:opacity-70"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
-                <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6">
-                  <div>
-                    <h3 className="font-display text-2xl font-extrabold text-white">{l.title}</h3>
-                    <p className="mt-1 line-clamp-2 max-w-xs text-sm text-white/70">{l.teaser}</p>
-                  </div>
-                  <span
-                    className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-sm transition-all duration-300 group-hover:bg-accent"
-                    aria-hidden="true"
-                  >
-                    <ArrowRight size={18} className="transition-transform duration-300 group-hover:translate-x-0.5" />
-                  </span>
-                </div>
-              </Link>
-            </Reveal>
+const leistungHeading = (
+  <div className="mb-8 flex flex-wrap items-end justify-between gap-6">
+    <SectionHeading
+      kicker="Unsere Leistungen"
+      title="Was wir für Sie bauen"
+      text="Neun Bereiche, ein Anspruch: Massarbeit, die exakt zu Ihrem Raum und Ihrem Leben passt."
+    />
+    <Button asChild variant="outline" className="group rounded-sm border-foreground/25 font-bold">
+      <Link to="/leistungen">
+        Alle Leistungen
+        <ArrowRight size={16} className="ml-2 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+      </Link>
+    </Button>
+  </div>
+);
+
+// Linkes/rechtes Gutter, das mit dem zentrierten max-w-7xl-Container fluchtet.
+const GUTTER = 'w-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))]';
+const CARD_W = 'w-[80vw] sm:w-[52vw] md:w-[40vw] lg:w-[30vw] xl:w-[24rem]';
+
+function LeistungenGrid() {
+  const sectionRef = useRef(null);
+  const trackRef = useRef(null);
+  const [reduce, setReduce] = useState(false);
+
+  useEffect(() => {
+    setReduce(window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false);
+  }, []);
+
+  useEffect(() => {
+    if (reduce) return;
+    const section = sectionRef.current;
+    const track = trackRef.current;
+    if (!section || !track) return;
+    let raf = 0;
+
+    const update = () => {
+      raf = 0;
+      const vh = window.innerHeight;
+      const maxX = Math.max(track.scrollWidth - window.innerWidth, 0);
+      const total = section.offsetHeight - vh;
+      const top = section.getBoundingClientRect().top;
+      const scrolled = Math.min(Math.max(-top, 0), Math.max(total, 0));
+      const progress = total > 0 ? scrolled / total : 0;
+      track.style.transform = `translate3d(${-progress * maxX}px,0,0)`;
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
+    const measure = () => {
+      const maxX = Math.max(track.scrollWidth - window.innerWidth, 0);
+      section.style.height = `${Math.round(window.innerHeight + maxX)}px`;
+      update();
+    };
+
+    measure();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', measure);
+    const t1 = setTimeout(measure, 300);
+    const t2 = setTimeout(measure, 1200);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', measure);
+      cancelAnimationFrame(raf);
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  }, [reduce]);
+
+  // Fallback bei „reduzierter Bewegung": normaler horizontaler Wisch-Scroller.
+  if (reduce) {
+    return (
+      <section className="bg-muted py-14 lg:py-20">
+        <div className="mx-auto max-w-7xl px-6">{leistungHeading}</div>
+        <div className="flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-4">
+          {leistungen.map((l) => (
+            <LeistungCard key={l.slug} l={l} className={`snap-start ${CARD_W}`} />
           ))}
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section ref={sectionRef} className="relative bg-muted">
+      <div className="sticky top-0 flex h-screen flex-col justify-center gap-8 overflow-hidden py-12">
+        <div className="mx-auto w-full max-w-7xl px-6">{leistungHeading}</div>
+        <div ref={trackRef} className="flex will-change-transform">
+          <div className={`shrink-0 ${GUTTER}`} aria-hidden="true" />
+          {leistungen.map((l) => (
+            <LeistungCard key={l.slug} l={l} className={`mr-5 ${CARD_W}`} />
+          ))}
+          <div className={`shrink-0 ${GUTTER}`} aria-hidden="true" />
         </div>
       </div>
     </section>
