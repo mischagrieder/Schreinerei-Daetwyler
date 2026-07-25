@@ -244,22 +244,46 @@ function LeistungenGrid() {
     const track = trackRef.current;
     if (!section || !track) return;
     let raf = 0;
+    let currentX = 0; // aktuell angezeigte Position
+    let targetX = 0;  // Ziel aus dem Scroll-Fortschritt
 
-    const update = () => {
-      raf = 0;
+    // Zielposition direkt aus dem vertikalen Scroll-Fortschritt ableiten.
+    const computeTarget = () => {
       const vh = window.innerHeight;
       const maxX = Math.max(track.scrollWidth - window.innerWidth, 0);
       const total = section.offsetHeight - vh;
       const top = section.getBoundingClientRect().top;
       const scrolled = Math.min(Math.max(-top, 0), Math.max(total, 0));
       const progress = total > 0 ? scrolled / total : 0;
-      track.style.transform = `translate3d(${-progress * maxX}px,0,0)`;
+      return -progress * maxX;
     };
-    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
+
+    // Sanftes Nachgleiten: currentX nähert sich pro Frame dem Ziel (Lerp),
+    // dadurch fliesst die Bewegung beim Loslassen weich aus statt hart zu stoppen.
+    const render = () => {
+      const diff = targetX - currentX;
+      if (Math.abs(diff) < 0.4) {
+        currentX = targetX;
+        track.style.transform = `translate3d(${currentX}px,0,0)`;
+        raf = 0;
+        return;
+      }
+      currentX += diff * 0.085;
+      track.style.transform = `translate3d(${currentX}px,0,0)`;
+      raf = requestAnimationFrame(render);
+    };
+
+    const onScroll = () => {
+      targetX = computeTarget();
+      if (!raf) raf = requestAnimationFrame(render);
+    };
     const measure = () => {
       const maxX = Math.max(track.scrollWidth - window.innerWidth, 0);
       section.style.height = `${Math.round(window.innerHeight + maxX)}px`;
-      update();
+      // Bei Layout-Änderungen ohne Nachgleiten direkt an die richtige Stelle setzen.
+      targetX = computeTarget();
+      currentX = targetX;
+      track.style.transform = `translate3d(${currentX}px,0,0)`;
     };
 
     measure();
