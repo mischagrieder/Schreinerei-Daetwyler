@@ -1,13 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 import CtaBand from '@/components/CtaBand';
 import MobileCtaBar from '@/components/MobileCtaBar';
 import ChatWidget from '@/components/ChatWidget';
+import { initSmoothScroll, destroySmoothScroll } from '@/lib/smoothScroll';
 
 export default function Layout() {
   const [chatOpen, setChatOpen] = useState(false);
+
+  useEffect(() => {
+    initSmoothScroll();
+    return () => destroySmoothScroll();
+  }, []);
+
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <a
