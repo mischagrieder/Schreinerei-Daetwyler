@@ -18,10 +18,15 @@ const navItems = [
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
   const { pathname } = useLocation();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => {
+      const scroll = window.scrollY;
+      setScrolled(scroll > 8);
+      setScrollY(scroll);
+    };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -34,7 +39,10 @@ export default function Header() {
   return (
     <header className="fixed top-0 z-50 w-full">
       {/* Topbar */}
-      <div className="hidden bg-secondary text-white/80 lg:block">
+      <div
+        className="hidden bg-secondary text-white/80 lg:block transition-opacity duration-300"
+        style={{ opacity: Math.max(0, 1 - scrollY / 200) }}
+      >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-1.5 text-xs">
           <p className="flex items-center gap-2">
             <Clock size={13} className="text-accent" aria-hidden="true" />
