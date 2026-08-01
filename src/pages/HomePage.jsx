@@ -234,7 +234,6 @@ const leistungHeading = (
       dark
       kicker="Unsere Leistungen"
       title="Was wir für Sie bauen"
-      text="Neun Bereiche, ein Anspruch: Massarbeit, die exakt zu Ihrem Raum und Ihrem Leben passt."
     />
     <Button
       asChild
@@ -368,7 +367,7 @@ function ProjekteTeaser() {
         <SectionHeading
           kicker="Referenzen"
           title="Ausgewählte Projekte"
-          text="Ein kleiner Einblick in Arbeiten, die wir für unsere Kundinnen und Kunden realisiert haben, von der Wohnküche bis zur begehbaren Ankleide."
+          text="Ein kleiner Einblick in Arbeiten, die wir für unsere Kundinnen und Kunden realisiert haben."
         />
         <Reveal delay={0.1}>
           <Button asChild variant="outline" className="group rounded-sm border-foreground/25 font-bold">
@@ -590,9 +589,9 @@ export default function HomePage() {
     <>
       <Seo jsonLd={localBusinessJsonLd} image={images.heroWerkstatt} />
       <Hero />
+      <LeistungenGrid />
       <WarumDaetwyler />
       <GoogleReviews />
-      <LeistungenGrid />
       <ProjekteTeaser />
       <Prozess />
       <TeamTeaser />
