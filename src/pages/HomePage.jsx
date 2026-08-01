@@ -47,7 +47,7 @@ function Hero() {
         >
           <span className="inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.22em] text-white/90">
             <span className="h-px w-10 bg-accent" aria-hidden="true" />
-            Küchenbau & Schreinerei — seit 1989
+            Küchenbau & Schreinerei · seit 1989
           </span>
           <h1 className="mt-6 font-display text-4xl font-black leading-[1.02] text-white sm:text-6xl lg:text-7xl">
             Handwerk,
@@ -97,23 +97,56 @@ function Hero() {
   );
 }
 
-function MarqueeBand() {
-  const words = leistungen.map((l) => l.title);
+function WerkstattSlideshow() {
+  const slides = [
+    { src: images.haendeDetail, alt: 'Schreinerhände schleifen eine Kante aus Eichenholz' },
+    { src: images.werkstattCnc, alt: 'CNC-Maschine fräst eine Holzplatte in der Werkstatt' },
+    { src: images.lehrling, alt: 'Lernender Schreiner beim Ausmessen eines Holzbretts' },
+    { src: images.beratung, alt: 'Beratungsgespräch in der Werkstatt' },
+    { src: images.gebaeudeSolar, alt: 'Werkstattgebäude mit Solaranlage auf dem Dach' },
+  ];
+  const [i, setI] = useState(0);
+
+  useEffect(() => {
+    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
+    const id = setInterval(() => setI((n) => (n + 1) % slides.length), 3000);
+    return () => clearInterval(id);
+  }, [slides.length]);
+
   return (
-    <div className="overflow-hidden border-y border-border bg-white py-4" aria-hidden="true">
-      <div className="animate-marquee flex w-max gap-10 whitespace-nowrap">
-        {[0, 1].map((i) => (
-          <div key={i} className="flex gap-10 text-sm font-bold uppercase tracking-[0.2em] text-foreground/60">
-            {words.map((w) => (
-              <span key={w} className="flex items-center gap-10">
-                {w}
-                <span className="text-accent">✕</span>
-              </span>
-            ))}
-          </div>
+    <Reveal className="relative">
+      <div className="relative aspect-[4/3] w-full overflow-hidden rounded-sm bg-secondary">
+        {slides.map((s, idx) => (
+          <img
+            key={s.src}
+            src={min(s.src)}
+            alt={s.alt}
+            loading={idx === 0 ? 'eager' : 'lazy'}
+            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${
+              idx === i ? 'opacity-100' : 'opacity-0'
+            }`}
+          />
         ))}
+        <div className="absolute inset-x-0 bottom-0 flex justify-center gap-1.5 p-4">
+          {slides.map((_, idx) => (
+            <button
+              key={idx}
+              onClick={() => setI(idx)}
+              aria-label={`Bild ${idx + 1} von ${slides.length} anzeigen`}
+              className={`h-1.5 rounded-full transition-all duration-300 ${
+                idx === i ? 'w-8 bg-accent' : 'w-1.5 bg-white/60 hover:bg-white'
+              }`}
+            />
+          ))}
+        </div>
       </div>
-    </div>
+      <div className="absolute -bottom-8 -right-4 hidden max-w-[230px] rounded-sm bg-secondary p-6 text-white shadow-2xl sm:block lg:-right-10">
+        <p className="font-display text-4xl font-black text-accent">1989</p>
+        <p className="mt-1 text-sm leading-snug text-white/75">
+          gegründet und bis heute in Familienhand
+        </p>
+      </div>
+    </Reveal>
   );
 }
 
@@ -122,12 +155,12 @@ function WarumDaetwyler() {
     {
       icon: Award,
       title: 'Alles aus einer Hand',
-      text: 'Beratung, Planung, Produktion und Montage — ein Ansprechpartner von der Idee bis zur Übergabe.',
+      text: 'Beratung, Planung, Produktion und Montage: ein Ansprechpartner von der Idee bis zur Übergabe.',
     },
     {
       icon: Users,
       title: 'Kleines, starkes Team',
-      text: 'Rund 13 Fachleute mit jahrzehntelanger Erfahrung — viele sind seit über 25 Jahren dabei.',
+      text: 'Rund 13 Fachleute mit jahrzehntelanger Erfahrung. Viele sind seit über 25 Jahren dabei.',
     },
     {
       icon: Handshake,
@@ -137,33 +170,20 @@ function WarumDaetwyler() {
     {
       icon: Sun,
       title: 'Nachhaltig produziert',
-      text: 'Seit 2010 fertigen wir mit Solarstrom vom eigenen Dach — Handwerk mit gutem Gewissen.',
+      text: 'Seit 2010 fertigen wir mit Solarstrom vom eigenen Dach. Handwerk mit gutem Gewissen.',
     },
   ];
 
   return (
     <section className="mx-auto max-w-7xl px-6 py-14 lg:py-20">
       <div className="grid items-center gap-6 lg:grid-cols-2 lg:gap-14">
-        <Reveal className="relative">
-          <img
-            src={min(images.haendeDetail)}
-            alt="Schreinerhände schleifen eine Kante aus Eichenholz"
-            className="aspect-[4/3] w-full rounded-sm object-cover"
-            loading="lazy"
-          />
-          <div className="absolute -bottom-8 -right-4 hidden max-w-[230px] rounded-sm bg-secondary p-6 text-white shadow-2xl sm:block lg:-right-10">
-            <p className="font-display text-4xl font-black text-accent">1989</p>
-            <p className="mt-1 text-sm leading-snug text-white/75">
-              gegründet — und bis heute in Familienhand
-            </p>
-          </div>
-        </Reveal>
+        <WerkstattSlideshow />
 
         <div>
           <SectionHeading
             kicker="Warum Dätwyler"
             title="Ihre Schreinerei für Projekte, die passen müssen"
-            text="Ob neue Küche, Einbauschrank oder Haustür: Wir führen alle Schreinerarbeiten fachlich kompetent, exakt und speditiv aus — mit einem Preis-Leistungs-Verhältnis, das überzeugt."
+            text="Ob neue Küche, Einbauschrank oder Haustür: Wir führen alle Schreinerarbeiten fachlich kompetent, exakt und speditiv aus. Mit einem Preis-Leistungs-Verhältnis, das überzeugt."
           />
           <div className="mt-10 grid gap-x-8 gap-y-8 sm:grid-cols-2">
             {usps.map((u, i) => (
@@ -349,7 +369,7 @@ function ProjekteTeaser() {
         <SectionHeading
           kicker="Referenzen"
           title="Ausgewählte Projekte"
-          text="Ein kleiner Einblick in Arbeiten, die wir für unsere Kundinnen und Kunden realisiert haben — von der Wohnküche bis zur begehbaren Ankleide."
+          text="Ein kleiner Einblick in Arbeiten, die wir für unsere Kundinnen und Kunden realisiert haben, von der Wohnküche bis zur begehbaren Ankleide."
         />
         <Reveal delay={0.1}>
           <Button asChild variant="outline" className="group rounded-sm border-foreground/25 font-bold">
@@ -374,7 +394,7 @@ function ProjekteTeaser() {
             >
               <img
                 src={min(images[p.img])}
-                alt={`${p.title} — ${p.desc}`}
+                alt={`${p.title}: ${p.desc}`}
                 loading="lazy"
                 className={`w-full object-cover transition-transform duration-500 group-hover:scale-105 ${i === 0 ? 'h-full min-h-[240px] lg:aspect-auto' : 'aspect-[4/3]'}`}
               />
@@ -397,25 +417,25 @@ function Prozess() {
       icon: Ruler,
       nr: '01',
       title: 'Beratung & Aufmass',
-      text: 'Wir hören zu, schauen uns Ihre Räume an und nehmen exakt Mass — bei Ihnen vor Ort oder in unserer Werkstatt.',
+      text: 'Wir hören zu, schauen uns Ihre Räume an und nehmen exakt Mass, bei Ihnen vor Ort oder in unserer Werkstatt.',
     },
     {
       icon: PencilRuler,
       nr: '02',
       title: 'Planung & Offerte',
-      text: 'Sie erhalten eine durchdachte Planung und eine transparente Offerte — verständlich und ohne versteckte Kosten.',
+      text: 'Sie erhalten eine durchdachte Planung und eine transparente Offerte: verständlich und ohne versteckte Kosten.',
     },
     {
       icon: Factory,
       nr: '03',
       title: 'Fertigung nach Mass',
-      text: 'In unserer Werkstatt in Strengelbach entsteht Ihr Projekt — von Hand und mit moderner CNC-Technik.',
+      text: 'In unserer Werkstatt in Strengelbach entsteht Ihr Projekt, von Hand und mit moderner CNC-Technik.',
     },
     {
       icon: Truck,
       nr: '04',
       title: 'Montage & Übergabe',
-      text: 'Wir montieren termingerecht, sauber und präzis — und übergeben erst, wenn alles perfekt sitzt.',
+      text: 'Wir montieren termingerecht, sauber und präzis. Übergeben wird erst, wenn alles perfekt sitzt.',
     },
   ];
 
@@ -471,51 +491,6 @@ function Prozess() {
   );
 }
 
-function NachhaltigkeitBand() {
-  return (
-    <section className="relative overflow-hidden bg-secondary py-14 text-white lg:py-20">
-      <div className="absolute inset-0">
-        <img
-          src={min(images.gebaeudeSolar)}
-          alt=""
-          aria-hidden="true"
-          loading="lazy"
-          className="h-full w-full object-cover opacity-25"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/80 to-secondary/40" />
-      </div>
-      <div className="relative mx-auto grid max-w-7xl gap-14 px-6 lg:grid-cols-[1.2fr,1fr] lg:items-center">
-        <div>
-          <SectionHeading
-            dark
-            kicker="Nachhaltigkeit"
-            title="Schreinern mit Strom von der eigenen Sonne"
-            text="Seit 2010 produziert unsere Solaranlage auf dem Werkstattdach nachhaltigen Strom. Dazu setzen wir auf langlebige Materialien, regionale Partner und Reparatur statt Wegwerfen — Handwerk, das Verantwortung übernimmt."
-          />
-          <div className="mt-9 flex flex-wrap gap-4">
-            <Button asChild size="lg" className="rounded-sm bg-accent px-7 font-bold text-white hover:bg-accent/90">
-              <Link to="/ueber-uns">Mehr über uns erfahren</Link>
-            </Button>
-          </div>
-        </div>
-        <Reveal delay={0.15} className="grid gap-4 sm:grid-cols-2">
-          {[
-            { value: 'Seit 2010', label: 'eigene Solaranlage auf dem Dach' },
-            { value: 'CNC', label: 'moderne Fertigung seit 2017' },
-            { value: 'Regional', label: 'Partner und Lieferanten aus der Schweiz' },
-            { value: 'Lehrbetrieb', label: 'wir bilden die nächste Generation aus' },
-          ].map((f) => (
-            <div key={f.value} className="rounded-sm border border-white/12 bg-white/[0.06] p-6 backdrop-blur-sm">
-              <p className="font-display text-2xl font-extrabold text-accent">{f.value}</p>
-              <p className="mt-1.5 text-sm leading-snug text-white/70">{f.label}</p>
-            </div>
-          ))}
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
 function TeamTeaser() {
   return (
     <section className="mx-auto max-w-7xl px-6 py-14 lg:py-20">
@@ -524,7 +499,7 @@ function TeamTeaser() {
           <SectionHeading
             kicker="Das Team"
             title="Menschen, die ihr Handwerk lieben"
-            text="Hinter jedem Möbelstück stehen rund 13 Fachleute — von der Inhaberin Renate Jost-Dätwyler bis zu unseren Lernenden. Viele sind seit über 25 Jahren Teil des Teams. Das spürt man: in der Beratung, in der Werkstatt und bei Ihnen zu Hause."
+            text="Hinter jedem Möbelstück stehen rund 13 Fachleute, von der Inhaberin Renate Jost-Dätwyler bis zu unseren Lernenden. Viele sind seit über 25 Jahren Teil des Teams. Das spürt man: in der Beratung, in der Werkstatt und bei Ihnen zu Hause."
           />
           <div className="mt-9 flex flex-wrap gap-4">
             <Button asChild size="lg" className="group rounded-sm bg-secondary px-7 font-bold text-white hover:bg-black">
@@ -538,41 +513,70 @@ function TeamTeaser() {
             </Button>
           </div>
         </div>
-        <Reveal className="order-1 grid grid-cols-2 gap-4 lg:order-2">
-          <img
-            src={min(images.lehrling)}
-            alt="Lernender Schreiner misst ein Holzbrett in der Werkstatt aus"
-            loading="lazy"
-            className="mt-8 aspect-[3/4] w-full rounded-sm object-cover"
-          />
-          <img
-            src={min(images.werkstattCnc)}
-            alt="CNC-Maschine fräst eine Holzplatte in der Schreinerei"
-            loading="lazy"
-            className="aspect-[3/4] w-full rounded-sm object-cover"
-          />
+        <Reveal className="order-1 lg:order-2">
+          <div className="relative overflow-hidden rounded-sm bg-secondary shadow-xl">
+            <img
+              src={min(images.teamGruppenfoto)}
+              alt="Das 13-köpfige Team der Dätwyler Küchenbau & Schreinerei AG vor der Werkstatt in Strengelbach"
+              loading="lazy"
+              className="aspect-[16/10] w-full object-cover"
+            />
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 to-transparent p-5">
+              <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/80">
+                Unser Team vor der Werkstatt in Strengelbach
+              </p>
+            </div>
+          </div>
         </Reveal>
       </div>
     </section>
   );
 }
 
+// Stilisierte Wordmarks — keine offiziellen Marken-Logos, sondern
+// typografische Platzhalter mit unterschiedlichem Look pro Partner.
+const PARTNER_STYLES = {
+  Electrolux: 'font-display text-2xl font-black italic tracking-tight',
+  Miele: 'font-display text-2xl font-black uppercase tracking-widest',
+  'V-ZUG': 'font-display text-2xl font-black uppercase tracking-[0.25em]',
+  Blum: 'font-display text-2xl font-black lowercase tracking-tighter',
+  Franke: 'font-display text-2xl font-bold uppercase tracking-wide',
+  Wesco: 'font-sans text-2xl font-black italic uppercase tracking-tight',
+  Suter: 'font-serif text-2xl font-semibold italic tracking-wide',
+  Formex: 'font-display text-2xl font-black uppercase tracking-widest',
+  'Koch Beschläge': 'font-display text-xl font-semibold tracking-tight',
+  Wasem: 'font-serif text-2xl font-bold italic tracking-wide',
+  Werkstation: 'font-sans text-xl font-light uppercase tracking-[0.3em]',
+  'Schürmann Natursteine': 'font-serif text-xl font-normal tracking-wide',
+  BBAG: 'font-display text-2xl font-black tracking-[0.35em]',
+};
+
+function PartnerMark({ name }) {
+  const cls = PARTNER_STYLES[name] ?? 'font-display text-2xl font-bold';
+  return (
+    <span
+      className={`inline-flex h-16 min-w-[140px] shrink-0 items-center justify-center whitespace-nowrap rounded-sm border border-border/60 bg-white px-6 text-foreground/70 grayscale transition-all duration-300 hover:border-accent hover:text-foreground hover:grayscale-0 ${cls}`}
+      aria-label={name}
+    >
+      {name}
+    </span>
+  );
+}
+
 function PartnerBand() {
   return (
-    <section className="border-t border-border bg-white py-10" aria-label="Unsere Partner und Lieferanten">
+    <section className="border-t border-border bg-muted/40 py-14" aria-label="Unsere Partner und Lieferanten">
       <div className="mx-auto max-w-7xl px-6">
         <p className="text-center text-xs font-bold uppercase tracking-[0.22em] text-muted-foreground">
           Wir arbeiten mit führenden Marken
         </p>
       </div>
       <div className="mt-8 overflow-hidden">
-        <div className="animate-marquee flex w-max items-center gap-14 whitespace-nowrap">
+        <div className="animate-marquee flex w-max items-center gap-6">
           {[0, 1].map((i) => (
-            <div key={i} className="flex items-center gap-14">
+            <div key={i} className="flex items-center gap-6">
               {partners.map((p) => (
-                <span key={p} className="font-display text-xl font-bold text-foreground/35 transition-colors hover:text-foreground/70">
-                  {p}
-                </span>
+                <PartnerMark key={`${i}-${p}`} name={p} />
               ))}
             </div>
           ))}
@@ -587,14 +591,12 @@ export default function HomePage() {
     <>
       <Seo jsonLd={localBusinessJsonLd} image={images.heroWerkstatt} />
       <Hero />
-      <MarqueeBand />
       <WarumDaetwyler />
       <GoogleReviews />
       <LeistungenGrid />
       <ProjekteTeaser />
       <Prozess />
       <TeamTeaser />
-      <NachhaltigkeitBand />
       <Faq />
       <PartnerBand />
     </>

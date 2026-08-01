@@ -25,7 +25,7 @@ export default function CtaBand() {
             Wir machen es aus Holz.
           </h2>
           <p className="mt-4 max-w-xl text-white/85">
-            Erzählen Sie uns von Ihrer Idee — wir beraten Sie persönlich und erstellen Ihnen eine transparente Offerte.
+            Erzählen Sie uns von Ihrer Idee. Wir beraten Sie persönlich und erstellen Ihnen eine transparente Offerte.
             Meist melden wir uns noch am selben Arbeitstag.
           </p>
         </Reveal>

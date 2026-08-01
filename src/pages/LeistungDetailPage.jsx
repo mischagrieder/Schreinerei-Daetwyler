@@ -85,7 +85,7 @@ export default function LeistungDetailPage() {
             <Reveal delay={0.15}>
               <img
                 src={images[leistung.detailImg]}
-                alt={`${leistung.title} — Detailansicht einer Arbeit der Dätwyler Schreinerei`}
+                alt={`${leistung.title}: Detailansicht einer Arbeit der Dätwyler Schreinerei`}
                 loading="lazy"
                 className="mt-12 aspect-[4/3] w-full rounded-sm object-cover"
               />
@@ -99,7 +99,7 @@ export default function LeistungDetailPage() {
                 Interessiert an {leistung.title === 'Kinder' ? 'einer Kinderküche' : `${leistung.title} nach Mass`}?
               </p>
               <p className="mt-3 text-sm leading-relaxed text-white/70">
-                Rufen Sie uns an oder fordern Sie eine unverbindliche Offerte an — wir beraten Sie gerne persönlich.
+                Rufen Sie uns an oder fordern Sie eine unverbindliche Offerte an. Wir beraten Sie gerne persönlich.
               </p>
               <div className="mt-7 flex flex-col gap-3">
                 <Button asChild size="lg" className="w-full rounded-sm bg-accent font-bold text-white hover:bg-accent/90">

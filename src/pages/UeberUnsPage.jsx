@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import Seo from '@/components/Seo';
 import Reveal from '@/components/Reveal';
 import SectionHeading from '@/components/SectionHeading';
-import { company, history, team, stats } from '@/data/company';
+import { history, team, stats } from '@/data/company';
 import { images, min } from '@/data/images';
 
 function initials(name) {
@@ -22,7 +22,7 @@ export default function UeberUnsPage() {
   return (
     <>
       <Seo
-        title="Über uns — Schreinerei mit Geschichte seit 1989"
+        title="Über uns · Schreinerei mit Geschichte seit 1989"
         description="Die Dätwyler Küchenbau & Schreinerei AG in Strengelbach: seit 1989 in Familienhand, rund 13 Fachleute, eigener Solarstrom und anerkannter Lehrbetrieb. Lernen Sie uns kennen."
         image={images.gebaeudeSolar}
       />
@@ -45,7 +45,7 @@ export default function UeberUnsPage() {
               Über uns
             </span>
             <h1 className="mt-5 max-w-3xl font-display text-4xl font-black leading-[1.05] text-white sm:text-5xl lg:text-6xl">
-              Seit 1989 in Strengelbach — <span className="text-accent">in Familienhand.</span>
+              Seit 1989 in Strengelbach, <span className="text-accent">in Familienhand.</span>
             </h1>
           </Reveal>
         </div>
@@ -57,7 +57,7 @@ export default function UeberUnsPage() {
           <SectionHeading
             kicker="Unsere Philosophie"
             title="Kompetent. Exakt. Speditiv."
-            text="Was Walter Dätwyler 1989 als Ein-Mann-Betrieb für Küchen-Innenausbau gründete, führt heute seine Tochter Renate Jost-Dätwyler in zweiter Generation. Geblieben ist der Anspruch: alle Arbeiten fachlich kompetent, exakt und speditiv auszuführen — mit gutem Preis-Leistungs-Verhältnis, transparenten Kosten und dem Ziel der vollen Kundenzufriedenheit."
+            text="Was Walter Dätwyler 1989 als Ein-Mann-Betrieb für Küchen-Innenausbau gründete, führt heute seine Tochter Renate Jost-Dätwyler in zweiter Generation. Geblieben ist der Anspruch: alle Arbeiten fachlich kompetent, exakt und speditiv auszuführen, mit gutem Preis-Leistungs-Verhältnis, transparenten Kosten und dem Ziel der vollen Kundenzufriedenheit."
           />
           <Reveal delay={0.1} className="grid grid-cols-2 gap-4">
             {stats.map((s) => (
@@ -110,11 +110,11 @@ export default function UeberUnsPage() {
             <SectionHeading
               kicker="Werkstatt & Werte"
               title="Traditionelles Handwerk, moderne Fertigung"
-              text="In unserer Werkstatt am Hüssiweg treffen Handhobel auf CNC-Technik: Seit 2017 ergänzt ein moderner Maschinenpark unsere Handarbeit — für Präzision auf den Zehntelmillimeter bei gleichbleibender handwerklicher Qualität."
+              text="In unserer Werkstatt am Hüssiweg treffen Handhobel auf CNC-Technik: Seit 2017 ergänzt ein moderner Maschinenpark unsere Handarbeit, für Präzision auf den Zehntelmillimeter bei gleichbleibender handwerklicher Qualität."
             />
             <ul className="mt-9 space-y-5">
               {[
-                { icon: Sun, text: 'Eigene Solaranlage seit 2010 — wir schreinern mit Sonnenstrom' },
+                { icon: Sun, text: 'Eigene Solaranlage seit 2010: wir schreinern mit Sonnenstrom' },
                 { icon: Award, text: 'Mitglied im Verband Schweizerischer Schreinermeister (VSSM)' },
                 { icon: GraduationCap, text: 'Anerkannter Lehrbetrieb mit eigener Lehrlingsbetreuung' },
                 { icon: Leaf, text: 'Langlebige Materialien und Reparatur statt Wegwerfen' },
@@ -128,6 +128,43 @@ export default function UeberUnsPage() {
               ))}
             </ul>
           </div>
+        </div>
+      </section>
+
+      {/* Nachhaltigkeit */}
+      <section className="relative overflow-hidden bg-secondary py-24 text-white lg:py-32">
+        <div className="absolute inset-0">
+          <img
+            src={min(images.gebaeudeSolar)}
+            alt=""
+            aria-hidden="true"
+            loading="lazy"
+            className="h-full w-full object-cover opacity-25"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-secondary via-secondary/80 to-secondary/40" />
+        </div>
+        <div className="relative mx-auto grid max-w-7xl gap-14 px-6 lg:grid-cols-[1.2fr,1fr] lg:items-center">
+          <div>
+            <SectionHeading
+              dark
+              kicker="Nachhaltigkeit"
+              title="Schreinern mit Strom von der eigenen Sonne"
+              text="Seit 2010 produziert unsere Solaranlage auf dem Werkstattdach nachhaltigen Strom. Dazu setzen wir auf langlebige Materialien, regionale Partner und Reparatur statt Wegwerfen. Handwerk, das Verantwortung übernimmt."
+            />
+          </div>
+          <Reveal delay={0.15} className="grid gap-4 sm:grid-cols-2">
+            {[
+              { value: 'Seit 2010', label: 'eigene Solaranlage auf dem Dach' },
+              { value: 'CNC', label: 'moderne Fertigung seit 2017' },
+              { value: 'Regional', label: 'Partner und Lieferanten aus der Schweiz' },
+              { value: 'Lehrbetrieb', label: 'wir bilden die nächste Generation aus' },
+            ].map((f) => (
+              <div key={f.value} className="rounded-sm border border-white/12 bg-white/[0.06] p-6 backdrop-blur-sm">
+                <p className="font-display text-2xl font-extrabold text-accent">{f.value}</p>
+                <p className="mt-1.5 text-sm leading-snug text-white/70">{f.label}</p>
+              </div>
+            ))}
+          </Reveal>
         </div>
       </section>
 
@@ -151,12 +188,36 @@ export default function UeberUnsPage() {
             </Reveal>
           </div>
 
+          {/* Übersicht als Tabelle: Name · Funktion · Dabei seit */}
+          <Reveal className="mb-10 overflow-hidden rounded-sm border border-white/10 bg-white/[0.04]">
+            <div className="grid grid-cols-[1.4fr,1.6fr,0.8fr] gap-4 border-b border-white/10 bg-white/[0.05] px-6 py-3 text-[0.7rem] font-bold uppercase tracking-[0.18em] text-white/60">
+              <span>Name</span>
+              <span>Funktion</span>
+              <span className="text-right">Dabei seit</span>
+            </div>
+            <ul>
+              {team.map((m) => (
+                <li
+                  key={m.name}
+                  className="grid grid-cols-[1.4fr,1.6fr,0.8fr] items-center gap-4 border-b border-white/5 px-6 py-4 last:border-b-0 hover:bg-white/[0.03]"
+                >
+                  <span className="font-display font-bold">{m.name}</span>
+                  <span className="text-sm text-white/75">{m.role}</span>
+                  <span className="text-right font-mono text-sm text-accent">
+                    {m.since ? m.since : 'in Ausbildung'}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+
+          {/* Detail-Karten mit Zusatzinfo */}
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {team.map((m, i) => (
               <Reveal
                 key={m.name}
                 delay={(i % 3) * 0.06}
-                className="group flex items-center gap-5 rounded-sm border border-white/10 bg-white/[0.05] p-5 transition-colors hover:border-accent/60"
+                className="group flex items-start gap-4 rounded-sm border border-white/10 bg-white/[0.05] p-5 transition-colors hover:border-accent/60"
               >
                 <span
                   className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-accent font-display text-lg font-extrabold text-white"
@@ -165,12 +226,16 @@ export default function UeberUnsPage() {
                   {initials(m.name)}
                 </span>
                 <div className="min-w-0">
-                  <h3 className="truncate font-display text-base font-bold">{m.name}</h3>
+                  <h3 className="font-display text-base font-bold">{m.name}</h3>
                   <p className="text-sm text-accent">{m.role}</p>
-                  <p className="mt-0.5 truncate text-xs text-white/55">
+                  <p className="mt-1 text-xs leading-snug text-white/60">
                     {m.detail}
-                    {m.since ? ` · im Team seit ${m.since}` : ''}
                   </p>
+                  {m.since && (
+                    <p className="mt-1.5 text-[0.7rem] font-semibold uppercase tracking-wider text-white/45">
+                      Im Team seit {m.since}
+                    </p>
+                  )}
                 </div>
               </Reveal>
             ))}

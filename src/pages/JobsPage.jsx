@@ -1,5 +1,5 @@
 import React from 'react';
-import { GraduationCap, Hammer, HeartHandshake, Mail, Phone, Send, Sun } from 'lucide-react';
+import { GraduationCap, Hammer, HeartHandshake, Mail, Send, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Seo from '@/components/Seo';
 import Reveal from '@/components/Reveal';
@@ -11,7 +11,7 @@ export default function JobsPage() {
   return (
     <>
       <Seo
-        title="Jobs & Lehrstellen — Schreiner:in werden bei Dätwyler"
+        title="Jobs & Lehrstellen · Schreiner:in werden bei Dätwyler"
         description="Karriere bei der Dätwyler Küchenbau & Schreinerei AG in Strengelbach: Schreinerlehre EFZ, Schnupperlehre und Initiativbewerbung. Anerkannter Lehrbetrieb. Tel. 062 751 49 88."
         image={images.lehrling}
       />
@@ -45,12 +45,12 @@ export default function JobsPage() {
         <SectionHeading
           kicker="Warum Dätwyler"
           title="Ein kleines Team mit grossem Zusammenhalt"
-          text="Bei uns bist du keine Nummer: In unserem rund 13-köpfigen Team kennt jeder jeden, die Wege sind kurz und die Projekte vielfältig — von der Traumküche bis zur Brandschutztür. Viele Mitarbeitende sind seit über 25 Jahren dabei. Das sagt mehr als jedes Inserat."
+          text="Bei uns bist du keine Nummer: In unserem rund 13-köpfigen Team kennt jeder jeden, die Wege sind kurz und die Projekte vielfältig, von der Traumküche bis zur Brandschutztür. Viele Mitarbeitende sind seit über 25 Jahren dabei. Das sagt mehr als jedes Inserat."
           className="mb-14"
         />
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {[
-            { icon: Hammer, title: 'Vielfältige Projekte', text: 'Küchen, Möbel, Türen, Terrassen — bei uns arbeitest du nie zweimal am gleichen Projekt.' },
+            { icon: Hammer, title: 'Vielfältige Projekte', text: 'Küchen, Möbel, Türen, Terrassen. Bei uns arbeitest du nie zweimal am gleichen Projekt.' },
             { icon: HeartHandshake, title: 'Familiäres Klima', text: 'Flache Hierarchien, echte Wertschätzung und ein Team, das zusammenhält.' },
             { icon: GraduationCap, title: 'Lehrbetrieb mit Herz', text: 'Vier erfahrene Lehrlingsbetreuer:innen begleiten unsere Lernenden durch die Ausbildung.' },
             { icon: Sun, title: 'Moderner Betrieb', text: 'CNC-Fertigung, eigene Solaranlage und eine top eingerichtete Werkstatt.' },
@@ -74,7 +74,7 @@ export default function JobsPage() {
               <h3 className="mt-3 font-display text-2xl font-extrabold text-foreground">Lehrstellen 2026/27</h3>
               <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
                 Unsere Lehrstellen für 2026/2027 sind bereits vergeben. Interessierst du dich für den Lehrbeginn 2028?
-                Melde dich frühzeitig — wir freuen uns auf dich.
+                Melde dich frühzeitig, wir freuen uns auf dich.
               </p>
               <p className="mt-5 rounded-sm bg-muted px-4 py-3 text-xs font-semibold text-foreground/70">
                 Aktuell besetzt · Vormerkung für 2028 möglich
@@ -98,7 +98,7 @@ export default function JobsPage() {
               <p className="text-xs font-bold uppercase tracking-[0.18em] text-accent">Fachleute gesucht?</p>
               <h3 className="mt-3 font-display text-2xl font-extrabold text-foreground">Initiativbewerbung</h3>
               <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground">
-                Zurzeit haben wir keine offenen Stellen — gute Leute sind uns aber immer willkommen. Sende deine
+                Zurzeit haben wir keine offenen Stellen, gute Leute sind uns aber immer willkommen. Sende deine
                 Initiativbewerbung an Renate Jost-Dätwyler.
               </p>
               <Button asChild variant="outline" className="mt-5 rounded-sm border-foreground/25 font-bold">
@@ -110,20 +110,6 @@ export default function JobsPage() {
             </Reveal>
           </div>
 
-          <Reveal delay={0.1} className="mt-10 flex flex-col items-start justify-between gap-6 rounded-sm bg-secondary p-8 text-white sm:flex-row sm:items-center">
-            <div>
-              <p className="font-display text-xl font-extrabold">Fragen zu Lehre oder Bewerbung?</p>
-              <p className="mt-1 text-sm text-white/70">
-                Renate Jost-Dätwyler gibt dir gerne persönlich Auskunft.
-              </p>
-            </div>
-            <Button asChild size="lg" className="shrink-0 rounded-sm bg-accent px-7 font-bold text-white hover:bg-accent/90">
-              <a href={`tel:${company.phoneIntl}`}>
-                <Phone size={17} className="mr-2" aria-hidden="true" />
-                {company.phone}
-              </a>
-            </Button>
-          </Reveal>
         </div>
       </section>
     </>
