@@ -9,25 +9,17 @@ import { projekte, projektKategorien } from '@/data/projekte';
 import { images, min } from '@/data/images';
 import { cn } from '@/lib/utils';
 
-/* Editorial cover-hero mit Index-Zahl und Meta-Zeile */
+/* Hero ohne Édition-Bar, mit klaren Kennzahlen */
 function ProjekteHero({ total }) {
   return (
     <section className="relative overflow-hidden bg-background pt-32 lg:pt-40">
-      <div className="border-b border-border/60">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-3 text-[0.65rem] font-bold uppercase tracking-[0.28em] text-muted-foreground">
-          <span>Kapitel 03 / Projekte</span>
-          <span className="hidden sm:inline">{total} Referenzen · Kanton Aargau</span>
-          <span className="text-accent">Édition 2026</span>
-        </div>
-      </div>
-
-      <div className="mx-auto grid max-w-7xl gap-8 px-6 pb-16 pt-14 lg:grid-cols-[1.15fr,1fr] lg:gap-16 lg:pb-24 lg:pt-20">
+      <div className="mx-auto grid max-w-7xl gap-8 px-6 pb-16 lg:grid-cols-[1.15fr,1fr] lg:gap-16 lg:pb-24">
         <div>
           <Reveal>
-            <p className="font-display text-[0.75rem] font-bold uppercase tracking-[0.32em] text-accent">
+            <p className="text-xs font-bold uppercase tracking-[0.24em] text-accent">
               Projekte &amp; Referenzen
             </p>
-            <h1 className="mt-8 font-display text-[2.75rem] font-black leading-[0.92] tracking-[-0.03em] text-foreground sm:text-6xl lg:text-[5.5rem]">
+            <h1 className="mt-8 font-display text-[2.75rem] font-black leading-[0.96] tracking-[-0.02em] text-foreground sm:text-6xl lg:text-[4.5rem]">
               Ergebnisse,
               <br />
               die man
@@ -35,35 +27,35 @@ function ProjekteHero({ total }) {
               <span className="text-accent">anfassen kann.</span>
             </h1>
             <p className="mt-8 max-w-lg text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Küchen, Schränke, Möbel und Innenausbauten aus Strengelbach und der Region. Bewegen Sie den
-              Griff über ein Projekt, um zwischen Vorher und Nachher zu wechseln.
+              Küchen, Schränke, Möbel und Innenausbauten aus Strengelbach und der Region. Bewegen Sie
+              den Griff über ein Projekt, um zwischen Vorher und Nachher zu wechseln.
             </p>
           </Reveal>
         </div>
 
         <Reveal delay={0.1} className="flex flex-col justify-end">
-          <div className="grid grid-cols-3 gap-4 border-t-2 border-foreground pt-6">
+          <div className="grid grid-cols-3 gap-4 border-t border-border pt-8">
             <div>
-              <p className="font-display text-4xl font-black tracking-[-0.03em] text-foreground sm:text-5xl">
+              <p className="font-display text-3xl font-black tracking-tight text-foreground sm:text-4xl">
                 {String(total).padStart(2, '0')}
               </p>
-              <p className="mt-1 text-[0.65rem] font-bold uppercase tracking-[0.22em] text-muted-foreground">
+              <p className="mt-2 text-[0.7rem] font-bold uppercase tracking-[0.18em] text-muted-foreground">
                 Referenzen
               </p>
             </div>
             <div>
-              <p className="font-display text-4xl font-black tracking-[-0.03em] text-foreground sm:text-5xl">
+              <p className="font-display text-3xl font-black tracking-tight text-foreground sm:text-4xl">
                 {projektKategorien.length - 1}
               </p>
-              <p className="mt-1 text-[0.65rem] font-bold uppercase tracking-[0.22em] text-muted-foreground">
+              <p className="mt-2 text-[0.7rem] font-bold uppercase tracking-[0.18em] text-muted-foreground">
                 Bereiche
               </p>
             </div>
             <div>
-              <p className="font-display text-4xl font-black tracking-[-0.03em] text-foreground sm:text-5xl">
+              <p className="font-display text-3xl font-black tracking-tight text-foreground sm:text-4xl">
                 37
               </p>
-              <p className="mt-1 text-[0.65rem] font-bold uppercase tracking-[0.22em] text-muted-foreground">
+              <p className="mt-2 text-[0.7rem] font-bold uppercase tracking-[0.18em] text-muted-foreground">
                 Jahre
               </p>
             </div>
@@ -111,21 +103,21 @@ function FilterBar({ filter, setFilter, counts }) {
   );
 }
 
-/* Karte im Grid: interaktiver Vorher/Nachher-Slider */
-function ProjektCard({ p, index, onOpen, featured = false }) {
+/* Projekt-Karte mit dunklem Text-Panel unter Bild */
+function ProjektCard({ p, onOpen, featured = false }) {
   const category = projektKategorien.find((k) => k.key === p.cat)?.label;
   return (
-    <Reveal delay={(index % 3) * 0.05}>
+    <Reveal>
       <article
         className={cn(
-          'group relative overflow-hidden rounded-sm bg-background',
+          'group relative flex h-full flex-col overflow-hidden rounded-sm bg-secondary shadow-sm transition-shadow duration-300 hover:shadow-xl',
           featured && 'lg:col-span-2 lg:row-span-2'
         )}
       >
-        {/* Bild-Container mit Slider */}
+        {/* Bild-Container */}
         <div
           className={cn(
-            'relative overflow-hidden rounded-sm',
+            'relative overflow-hidden',
             featured ? 'aspect-[16/11]' : 'aspect-[4/3]'
           )}
         >
@@ -148,34 +140,32 @@ function ProjektCard({ p, index, onOpen, featured = false }) {
           )}
         </div>
 
-        {/* Meta-Zeile darunter, editorial */}
-        <div className="mt-5 flex items-start justify-between gap-4">
+        {/* Dunkles Text-Panel */}
+        <div className="flex flex-1 items-start justify-between gap-4 bg-secondary p-5 text-white sm:p-6">
           <div className="min-w-0 flex-1">
-            <div className="flex items-center gap-3 text-[0.65rem] font-bold uppercase tracking-[0.22em] text-muted-foreground">
-              <span>No. {String(index + 1).padStart(2, '0')}</span>
-              <span className="h-px flex-1 bg-border" />
-              <span className="text-accent">{category}</span>
-            </div>
+            <p className="text-[0.65rem] font-bold uppercase tracking-[0.22em] text-accent">
+              {category}
+            </p>
             <h3
               className={cn(
-                'mt-3 font-display font-extrabold tracking-[-0.02em] text-foreground transition-colors group-hover:text-accent',
+                'mt-2 font-display font-extrabold tracking-[-0.01em] text-white',
                 featured ? 'text-2xl sm:text-3xl' : 'text-lg sm:text-xl'
               )}
             >
               {p.title}
             </h3>
-            <p className="mt-2 flex items-center gap-1.5 text-xs text-muted-foreground">
+            <p className="mt-2 flex items-center gap-1.5 text-xs text-white/60">
               <MapPin size={12} className="text-accent" aria-hidden="true" /> {p.place}
             </p>
             {featured && (
-              <p className="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">{p.desc}</p>
+              <p className="mt-3 max-w-md text-sm leading-relaxed text-white/70">{p.desc}</p>
             )}
           </div>
           <button
             type="button"
             onClick={() => onOpen()}
             aria-label={`${p.title} in Grossansicht öffnen`}
-            className="mt-3 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:border-accent hover:bg-accent hover:text-white"
+            className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white/20 text-white transition-colors hover:border-accent hover:bg-accent"
           >
             <ArrowUpRight size={16} strokeWidth={2} />
           </button>
@@ -214,8 +204,8 @@ function Lightbox({ items, index, onClose, onNav }) {
       {/* Top-Bar */}
       <header className="flex items-center justify-between gap-4 border-b border-white/10 px-4 py-4 sm:px-8">
         <div className="min-w-0 text-white">
-          <p className="text-[0.6rem] font-bold uppercase tracking-[0.28em] text-accent">
-            {category} · No. {String(index + 1).padStart(2, '0')} / {items.length}
+          <p className="text-[0.6rem] font-bold uppercase tracking-[0.24em] text-accent">
+            {category}
           </p>
           <p className="mt-1 truncate font-display text-base font-extrabold sm:text-lg">
             {item.title}
@@ -270,7 +260,7 @@ function Lightbox({ items, index, onClose, onNav }) {
           {/* Meta-Panel */}
           <aside className="flex flex-col justify-between rounded-sm border border-white/10 bg-white/[0.04] p-6 text-white sm:p-8">
             <div>
-              <p className="text-[0.6rem] font-bold uppercase tracking-[0.28em] text-accent">Objekt</p>
+              <p className="text-[0.6rem] font-bold uppercase tracking-[0.24em] text-accent">Objekt</p>
               <h2 className="mt-2 font-display text-2xl font-extrabold leading-tight sm:text-3xl">
                 {item.title}
               </h2>
@@ -364,14 +354,13 @@ export default function ProjektePage() {
       <ProjekteHero total={projekte.length} />
       <FilterBar filter={filter} setFilter={setFilter} counts={counts} />
 
-      {/* Bento-Grid */}
+      {/* Grid mit dunklen Karten */}
       <section className="mx-auto max-w-7xl px-6 py-16 lg:py-24">
-        <div className="grid grid-cols-1 gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid auto-rows-fr grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {visible.map((p, i) => (
             <ProjektCard
               key={`${p.img}-${i}`}
               p={p}
-              index={i}
               featured={i === 0 && filter === 'alle'}
               onOpen={() => setLightbox(i)}
             />
@@ -389,7 +378,7 @@ export default function ProjektePage() {
       <section className="border-t border-border bg-muted/40 py-20">
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-8 px-6 lg:flex-row lg:items-center">
           <div className="max-w-xl">
-            <p className="text-[0.65rem] font-bold uppercase tracking-[0.28em] text-accent">Nächstes Kapitel</p>
+            <p className="text-[0.65rem] font-bold uppercase tracking-[0.24em] text-accent">Ihr Projekt</p>
             <h2 className="mt-4 font-display text-3xl font-extrabold leading-tight tracking-[-0.02em] text-foreground sm:text-4xl lg:text-5xl">
               Ihr Projekt als nächste Referenz.
             </h2>

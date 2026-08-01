@@ -65,14 +65,16 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Main bar */}
-      <div
-        className={cn(
-          'border-b transition-all duration-300',
-          scrolled ? 'border-border bg-white/95 shadow-sm backdrop-blur-md' : 'border-transparent bg-white'
-        )}
-      >
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-3.5">
+      {/* Main bar: floating pill mit runden Ecken links/rechts */}
+      <div className="px-3 pt-3 sm:px-6 sm:pt-4">
+        <div
+          className={cn(
+            'mx-auto flex max-w-7xl items-center justify-between gap-6 rounded-full border px-4 py-3 transition-all duration-300 sm:px-6 sm:py-3.5',
+            scrolled
+              ? 'border-border/60 bg-white/95 shadow-lg backdrop-blur-md'
+              : 'border-border/40 bg-white shadow-md'
+          )}
+        >
           <Link to="/" aria-label="Zur Startseite" className="shrink-0">
             <img src={logo} alt="Dätwyler Küchenbau & Schreinerei AG" className="h-11 w-auto" width="225" height="100" />
           </Link>
