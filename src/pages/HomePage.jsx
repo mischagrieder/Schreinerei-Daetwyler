@@ -253,12 +253,93 @@ const leistungHeading = (
 // Linkes/rechtes Gutter, das mit dem zentrierten max-w-7xl-Container fluchtet.
 const GUTTER = 'w-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))]';
 
-function LeistungenGrid() {
+/* Desktop-Variante: horizontales Scroll-Hijacking mit sanftem Nachgleiten */
+function LeistungenGridDesktop() {
+  const sectionRef = useRef(null);
+  const trackRef = useRef(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const track = trackRef.current;
+    if (!section || !track) return;
+    if (window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return;
+
+    let raf = 0;
+    let currentX = 0;
+    let targetX = 0;
+
+    const computeTarget = () => {
+      const vh = window.innerHeight;
+      const maxX = Math.max(track.scrollWidth - window.innerWidth, 0);
+      const total = section.offsetHeight - vh;
+      const top = section.getBoundingClientRect().top;
+      const scrolled = Math.min(Math.max(-top, 0), Math.max(total, 0));
+      const progress = total > 0 ? scrolled / total : 0;
+      return -progress * maxX;
+    };
+
+    const render = () => {
+      const diff = targetX - currentX;
+      if (Math.abs(diff) < 0.4) {
+        currentX = targetX;
+        track.style.transform = `translate3d(${currentX}px,0,0)`;
+        raf = 0;
+        return;
+      }
+      currentX += diff * 0.085;
+      track.style.transform = `translate3d(${currentX}px,0,0)`;
+      raf = requestAnimationFrame(render);
+    };
+
+    const onScroll = () => {
+      targetX = computeTarget();
+      if (!raf) raf = requestAnimationFrame(render);
+    };
+    const measure = () => {
+      const maxX = Math.max(track.scrollWidth - window.innerWidth, 0);
+      section.style.height = `${Math.round(window.innerHeight + maxX)}px`;
+      targetX = computeTarget();
+      currentX = targetX;
+      track.style.transform = `translate3d(${currentX}px,0,0)`;
+    };
+
+    measure();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', measure);
+    const t1 = setTimeout(measure, 300);
+    const t2 = setTimeout(measure, 1200);
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener('resize', measure);
+      cancelAnimationFrame(raf);
+      clearTimeout(t1);
+      clearTimeout(t2);
+      section.style.height = '';
+    };
+  }, []);
+
+  return (
+    <section ref={sectionRef} className="relative bg-secondary">
+      <div className="sticky top-0 flex h-screen flex-col justify-center gap-8 overflow-hidden py-12">
+        <div className="mx-auto w-full max-w-7xl px-6">{leistungHeading}</div>
+        <div ref={trackRef} className="flex will-change-transform">
+          <div className={`shrink-0 ${GUTTER}`} aria-hidden="true" />
+          {leistungen.map((l) => (
+            <LeistungCard key={l.slug} l={l} className="mr-5" />
+          ))}
+          <div className={`shrink-0 ${GUTTER}`} aria-hidden="true" />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* Mobile-Variante: Snap-Scroll mit Pfeil-Buttons, kein Scroll-Hijacking */
+function LeistungenGridMobile() {
   const trackRef = useRef(null);
   const [canPrev, setCanPrev] = useState(false);
   const [canNext, setCanNext] = useState(true);
 
-  // Sichtbarkeit der Pfeile berechnen und bei Scroll aktualisieren.
   useEffect(() => {
     const el = trackRef.current;
     if (!el) return;
@@ -275,7 +356,6 @@ function LeistungenGrid() {
     };
   }, []);
 
-  // Ein Karten-Breiten-Schritt pro Klick.
   const scrollBy = (dir) => {
     const el = trackRef.current;
     if (!el) return;
@@ -285,51 +365,67 @@ function LeistungenGrid() {
   };
 
   return (
-    <section className="relative bg-secondary py-14 lg:py-20">
+    <section className="relative bg-secondary py-14">
       <div className="mx-auto w-full max-w-7xl px-6">{leistungHeading}</div>
 
       <div className="relative mt-4">
-        {/* Pfeile: nur auf Desktop sichtbar */}
-        <button
-          type="button"
-          onClick={() => scrollBy(-1)}
-          aria-label="Vorherige Leistung"
-          disabled={!canPrev}
-          className={`absolute left-4 top-1/2 z-10 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white text-secondary shadow-xl transition-all duration-200 lg:flex ${
-            canPrev ? 'opacity-100 hover:bg-accent hover:text-white' : 'pointer-events-none opacity-0'
-          }`}
-        >
-          <ChevronLeft size={22} />
-        </button>
-        <button
-          type="button"
-          onClick={() => scrollBy(1)}
-          aria-label="Nächste Leistung"
-          disabled={!canNext}
-          className={`absolute right-4 top-1/2 z-10 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white text-secondary shadow-xl transition-all duration-200 lg:flex ${
-            canNext ? 'opacity-100 hover:bg-accent hover:text-white' : 'pointer-events-none opacity-0'
-          }`}
-        >
-          <ChevronRight size={22} />
-        </button>
+        {/* Pfeile über dem Track, kompakt für Mobile */}
+        <div className="mb-3 flex items-center justify-end gap-2 px-6">
+          <button
+            type="button"
+            onClick={() => scrollBy(-1)}
+            aria-label="Vorherige Leistung"
+            disabled={!canPrev}
+            className={`flex h-11 w-11 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white transition-all duration-200 ${
+              canPrev ? 'opacity-100 hover:border-accent hover:bg-accent' : 'pointer-events-none opacity-30'
+            }`}
+          >
+            <ChevronLeft size={20} />
+          </button>
+          <button
+            type="button"
+            onClick={() => scrollBy(1)}
+            aria-label="Nächste Leistung"
+            disabled={!canNext}
+            className={`flex h-11 w-11 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white transition-all duration-200 ${
+              canNext ? 'opacity-100 hover:border-accent hover:bg-accent' : 'pointer-events-none opacity-30'
+            }`}
+          >
+            <ChevronRight size={20} />
+          </button>
+        </div>
 
-        {/* Scroll-Track: native touch-swipe auf Mobile, snap-Points, keine Scrollbar */}
         <div
           ref={trackRef}
           className="scrollbar-hide flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-6"
-          style={{ scrollPaddingLeft: '1.5rem', scrollPaddingRight: '1.5rem' }}
         >
-          <div className={`shrink-0 ${GUTTER}`} aria-hidden="true" />
+          <div className="w-6 shrink-0" aria-hidden="true" />
           {leistungen.map((l) => (
             <div key={l.slug} data-card className="snap-start">
               <LeistungCard l={l} />
             </div>
           ))}
-          <div className={`shrink-0 ${GUTTER}`} aria-hidden="true" />
+          <div className="w-6 shrink-0" aria-hidden="true" />
         </div>
       </div>
     </section>
   );
+}
+
+/* Wechselt zwischen Desktop-Hijacking und Mobile-Slider anhand der Viewport-Breite */
+function LeistungenGrid() {
+  const [isDesktop, setIsDesktop] = useState(() =>
+    typeof window !== 'undefined' && window.matchMedia?.('(min-width: 1024px)').matches
+  );
+
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1024px)');
+    const onChange = (e) => setIsDesktop(e.matches);
+    mq.addEventListener('change', onChange);
+    return () => mq.removeEventListener('change', onChange);
+  }, []);
+
+  return isDesktop ? <LeistungenGridDesktop /> : <LeistungenGridMobile />;
 }
 
 function ProjekteTeaser() {
