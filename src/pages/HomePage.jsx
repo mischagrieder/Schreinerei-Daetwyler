@@ -45,9 +45,8 @@ function Hero() {
           transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] }}
           className="max-w-3xl"
         >
-          <span className="inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.22em] text-white/90">
-            <span className="h-px w-10 bg-accent" aria-hidden="true" />
-            Küchenbau & Schreinerei · seit 1989
+          <span className="inline-block text-xs font-bold uppercase tracking-[0.24em] text-accent">
+            Küchenbau &amp; Schreinerei · seit 1989
           </span>
           <h1 className="mt-6 font-display text-4xl font-black leading-[1.02] text-white sm:text-6xl lg:text-7xl">
             Handwerk,
@@ -55,8 +54,8 @@ function Hero() {
             das <span className="text-accent">bleibt.</span>
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/80">
-            Massgefertigte Küchen, Möbel und Innenausbauten – mit höchster Präzision geplant, gefertigt und montiert.
-            Qualität, auf die Sie sich verlassen können.
+            Massgefertigte Küchen, Möbel und Innenausbauten, mit höchster Präzision geplant, gefertigt
+            und montiert. Qualität, auf die Sie sich verlassen können.
           </p>
           <div className="mt-9 flex flex-wrap items-center gap-4">
             <Button asChild size="lg" className="group rounded-sm bg-accent px-8 py-6 text-base font-bold text-white hover:bg-accent/90">
@@ -536,18 +535,18 @@ function TeamTeaser() {
 // Stilisierte Wordmarks — keine offiziellen Marken-Logos, sondern
 // typografische Platzhalter mit unterschiedlichem Look pro Partner.
 const PARTNER_STYLES = {
-  Electrolux: 'font-display text-2xl font-black italic tracking-tight',
+  Electrolux: 'font-display text-2xl font-black tracking-tight',
   Miele: 'font-display text-2xl font-black uppercase tracking-widest',
   'V-ZUG': 'font-display text-2xl font-black uppercase tracking-[0.25em]',
   Blum: 'font-display text-2xl font-black lowercase tracking-tighter',
   Franke: 'font-display text-2xl font-bold uppercase tracking-wide',
-  Wesco: 'font-sans text-2xl font-black italic uppercase tracking-tight',
-  Suter: 'font-serif text-2xl font-semibold italic tracking-wide',
+  Wesco: 'font-display text-2xl font-black uppercase tracking-tight',
+  Suter: 'font-display text-2xl font-semibold tracking-wide',
   Formex: 'font-display text-2xl font-black uppercase tracking-widest',
   'Koch Beschläge': 'font-display text-xl font-semibold tracking-tight',
-  Wasem: 'font-serif text-2xl font-bold italic tracking-wide',
-  Werkstation: 'font-sans text-xl font-light uppercase tracking-[0.3em]',
-  'Schürmann Natursteine': 'font-serif text-xl font-normal tracking-wide',
+  Wasem: 'font-display text-2xl font-bold tracking-wide',
+  Werkstation: 'font-display text-xl font-light uppercase tracking-[0.3em]',
+  'Schürmann Natursteine': 'font-display text-xl font-normal tracking-wide',
   BBAG: 'font-display text-2xl font-black tracking-[0.35em]',
 };
 

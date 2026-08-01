@@ -51,9 +51,8 @@ export default function KontaktPage() {
         </div>
         <div className="relative mx-auto max-w-7xl px-6">
           <Reveal>
-            <span className="inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.22em] text-white/80">
-              <span className="h-px w-10 bg-accent" aria-hidden="true" />
-              Kontakt & Offerte
+            <span className="inline-block text-xs font-bold uppercase tracking-[0.24em] text-accent">
+              Kontakt &amp; Offerte
             </span>
             <h1 className="mt-5 max-w-3xl font-display text-4xl font-black leading-[1.05] sm:text-5xl lg:text-6xl">
               Reden wir über <span className="text-accent">Ihr Projekt.</span>
@@ -209,8 +208,7 @@ export default function KontaktPage() {
       <section aria-labelledby="ansprechpartner" className="border-t border-border bg-muted py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-6">
           <Reveal className="mb-12 max-w-2xl">
-            <span className="inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.22em] text-accent">
-              <span className="h-px w-10 bg-accent" aria-hidden="true" />
+            <span className="inline-block text-xs font-bold uppercase tracking-[0.24em] text-accent">
               Ihre Ansprechpartner
             </span>
             <h2

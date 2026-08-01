@@ -13,8 +13,8 @@ export const company = {
   founded: 1989,
   instagram: 'https://instagram.com/daetwyler_schreinerei',
   openingHours: [
-    { days: 'Montag – Donnerstag', hours: '07:00 – 12:00 / 13:30 – 17:00' },
-    { days: 'Freitag', hours: '07:00 – 12:00 / 13:30 – 16:00' },
+    { days: 'Montag bis Donnerstag', hours: '07:00 bis 12:00 / 13:30 bis 17:00' },
+    { days: 'Freitag', hours: '07:00 bis 12:00 / 13:30 bis 16:00' },
     { days: 'Samstag / Sonntag', hours: 'geschlossen' },
   ],
   mapsEmbed:

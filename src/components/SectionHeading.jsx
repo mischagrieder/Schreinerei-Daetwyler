@@ -6,10 +6,8 @@ export default function SectionHeading({ kicker, title, text, dark = false, cent
   return (
     <Reveal className={cn('max-w-2xl', center && 'mx-auto text-center', className)}>
       {kicker && (
-        <span className="inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] text-accent">
-          <span className="h-px w-8 bg-accent" aria-hidden="true" />
+        <span className="inline-block text-xs font-bold uppercase tracking-[0.24em] text-accent">
           {kicker}
-          {center && <span className="h-px w-8 bg-accent" aria-hidden="true" />}
         </span>
       )}
       <h2
