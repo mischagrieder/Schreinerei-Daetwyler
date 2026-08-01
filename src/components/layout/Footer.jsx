@@ -21,7 +21,7 @@ export default function Footer() {
             />
           </Link>
           <p className="mt-5 max-w-xs text-sm leading-relaxed text-muted-foreground">
-            Seit 1989 fertigen wir Küchen, Möbel und Innenausbauten nach Mass — mit einem kleinen, topmotivierten Team.
+            Seit 1989 fertigen wir Küchen, Möbel und Innenausbauten nach Mass, mit einem kleinen, topmotivierten Team.
           </p>
           <a
             href={company.instagram}
@@ -96,7 +96,7 @@ export default function Footer() {
             ))}
           </ul>
           <p className="mt-6 rounded-sm border border-border bg-muted p-3 text-xs leading-relaxed text-muted-foreground">
-            Anerkannter Lehrbetrieb — wir bilden Schreiner:innen EFZ aus.
+            Anerkannter Lehrbetrieb: Wir bilden Schreiner:innen EFZ aus.
           </p>
         </div>
       </div>

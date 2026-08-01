@@ -54,12 +54,29 @@ function Lightbox({ items, index, onClose, onNav }) {
         <ChevronRight size={24} />
       </button>
       <figure className="max-h-[86vh] max-w-5xl" onClick={(e) => e.stopPropagation()}>
-        <img
-          src={images[item.img]}
-          alt={`${item.title} — ${item.desc}`}
-          className="max-h-[76vh] w-auto rounded-sm object-contain"
-        />
-        <figcaption className="mt-4 text-center">
+        <div className="relative">
+          <img
+            src={images[item.img]}
+            alt={`Nachher: ${item.title}, ${item.desc}`}
+            className="max-h-[70vh] w-auto rounded-sm object-contain"
+          />
+          <span className="absolute left-3 top-3 rounded-sm bg-accent px-3 py-1 text-xs font-bold uppercase tracking-wider text-white shadow-lg">
+            Nachher
+          </span>
+          {item.imgBefore && (
+            <div className="absolute -bottom-6 -right-3 w-32 overflow-hidden rounded-sm border-4 border-black bg-secondary shadow-2xl sm:w-44 lg:w-56">
+              <img
+                src={images[item.imgBefore]}
+                alt={`Vorher: Ausgangszustand vor der Umsetzung von ${item.title}`}
+                className="aspect-square w-full object-cover grayscale"
+              />
+              <span className="absolute inset-x-0 bottom-0 bg-secondary/85 py-1 text-center text-[0.65rem] font-bold uppercase tracking-widest text-white">
+                Vorher
+              </span>
+            </div>
+          )}
+        </div>
+        <figcaption className="mt-8 text-center">
           <p className="font-display text-lg font-bold text-white">{item.title}</p>
           <p className="mt-1 text-sm text-white/60">{item.place} · {item.desc}</p>
         </figcaption>
@@ -83,13 +100,13 @@ export default function ProjektePage() {
   return (
     <>
       <Seo
-        title="Projekte & Referenzen — Küchen, Möbel & Innenausbau"
+        title="Projekte & Referenzen · Küchen, Möbel & Innenausbau"
         description="Referenzen der Dätwyler Küchenbau & Schreinerei AG: realisierte Küchen, Schränke, Möbel, Bäder und Aussenprojekte nach Mass aus Strengelbach und der Region Aargau."
         image={images.projektKuecheInsel}
         jsonLd={{
           '@context': 'https://schema.org',
           '@type': 'CollectionPage',
-          name: 'Projekte & Referenzen — Dätwyler Küchenbau & Schreinerei AG',
+          name: 'Projekte & Referenzen · Dätwyler Küchenbau & Schreinerei AG',
           url: 'https://www.daetwyler-schreinerei.ch/projekte',
         }}
       />
@@ -137,29 +154,52 @@ export default function ProjektePage() {
           ))}
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        {/* Grid mit Vorher/Nachher */}
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {visible.map((p, i) => (
             <Reveal key={`${p.img}-${i}`} delay={(i % 3) * 0.06}>
               <button
                 onClick={() => setLightbox(i)}
-                className="group relative block w-full overflow-hidden rounded-sm bg-secondary text-left"
+                className="group relative block w-full text-left"
               >
-                <img
-                  src={min(images[p.img])}
-                  alt={`${p.title} — ${p.desc}`}
-                  loading="lazy"
-                  className="aspect-[4/3] w-full object-cover transition-all duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent opacity-90 transition-opacity group-hover:opacity-100" />
-                <div className="absolute inset-x-0 bottom-0 p-5">
-                  <span className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-accent">
-                    {projektKategorien.find((k) => k.key === p.cat)?.label}
+                {/* Nachher-Bild (gross) */}
+                <div className="relative overflow-hidden rounded-sm bg-secondary">
+                  <img
+                    src={min(images[p.img])}
+                    alt={`Nachher: ${p.title}, ${p.desc}`}
+                    loading="lazy"
+                    className="aspect-[4/3] w-full object-cover transition-all duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/10 to-transparent opacity-90 transition-opacity group-hover:opacity-100" />
+                  <span className="absolute right-3 top-3 rounded-sm bg-accent px-2.5 py-1 text-[0.65rem] font-bold uppercase tracking-wider text-white shadow-lg">
+                    Nachher
                   </span>
-                  <h2 className="mt-1 font-display text-lg font-extrabold text-white">{p.title}</h2>
-                  <p className="mt-0.5 flex items-center gap-1.5 text-xs text-white/65">
-                    <MapPin size={12} className="text-accent" aria-hidden="true" /> {p.place}
-                  </p>
+                  <div className="absolute inset-x-0 bottom-0 p-5 pr-32 sm:pr-36">
+                    <span className="text-[0.7rem] font-bold uppercase tracking-[0.18em] text-accent">
+                      {projektKategorien.find((k) => k.key === p.cat)?.label}
+                    </span>
+                    <h2 className="mt-1 font-display text-lg font-extrabold text-white">{p.title}</h2>
+                    <p className="mt-0.5 flex items-center gap-1.5 text-xs text-white/65">
+                      <MapPin size={12} className="text-accent" aria-hidden="true" /> {p.place}
+                    </p>
+                  </div>
+
+                  {/* Vorher-Bild (klein, überklappend rechts unten) */}
+                  {p.imgBefore && (
+                    <div className="absolute -bottom-6 -right-3 w-28 overflow-hidden rounded-sm border-4 border-background bg-secondary shadow-2xl transition-transform duration-500 group-hover:scale-110 sm:w-32 lg:w-36">
+                      <div className="relative">
+                        <img
+                          src={min(images[p.imgBefore])}
+                          alt={`Vorher: Ausgangszustand vor der Umsetzung von ${p.title}`}
+                          loading="lazy"
+                          className="aspect-square w-full object-cover grayscale"
+                        />
+                        <span className="absolute inset-x-0 bottom-0 bg-secondary/85 py-0.5 text-center text-[0.6rem] font-bold uppercase tracking-widest text-white">
+                          Vorher
+                        </span>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </button>
             </Reveal>
@@ -171,7 +211,7 @@ export default function ProjektePage() {
           <div>
             <h2 className="font-display text-2xl font-extrabold text-foreground">Ihr Projekt als nächste Referenz?</h2>
             <p className="mt-2 max-w-xl text-sm text-muted-foreground">
-              Erzählen Sie uns von Ihrer Idee — wir beraten Sie persönlich und erstellen eine unverbindliche Offerte.
+              Erzählen Sie uns von Ihrer Idee. Wir beraten Sie persönlich und erstellen eine unverbindliche Offerte.
             </p>
           </div>
           <Button asChild size="lg" className="group shrink-0 rounded-sm bg-accent px-7 font-bold text-white hover:bg-accent/90">

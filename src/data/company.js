@@ -34,7 +34,7 @@ export const history = [
   { year: '1994', event: 'Erwerb, Umbau und Bezug der Liegenschaft Hüssiweg 33 in Strengelbach' },
   { year: '1997', event: 'Neuer Name «Dätwyler Küchenbau + Schreinerei», neues Logo, neue Leitsätze' },
   { year: '2000', event: 'Gründung der Aktiengesellschaft' },
-  { year: '2010', event: 'Eigene Solaranlage — nachhaltiger Strom vom eigenen Dach' },
+  { year: '2010', event: 'Eigene Solaranlage: nachhaltiger Strom vom eigenen Dach' },
   { year: '2017', event: 'Erweiterung des Maschinenparks mit moderner CNC-Technik' },
   { year: '2020', event: 'Geschäftsübergabe an Renate Jost-Dätwyler' },
   { year: 'Heute', event: 'Rund 13 Fachleute, anerkannter Lehrbetrieb, modernste Fertigung' },

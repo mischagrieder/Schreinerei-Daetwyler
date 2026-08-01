@@ -17,11 +17,11 @@ function PageHero() {
             Unsere Leistungen
           </span>
           <h1 className="mt-5 max-w-3xl font-display text-4xl font-black leading-[1.05] sm:text-5xl lg:text-6xl">
-            Alles, was ein Schreiner kann — <span className="text-accent">nach Mass.</span>
+            Alles, was ein Schreiner kann, <span className="text-accent">nach Mass.</span>
           </h1>
           <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/75">
             Von der Traumküche über Einbauschränke bis zur Holzterrasse: Wir planen, fertigen und montieren alle
-            Schreinerarbeiten in eigener Werkstatt — inklusive fachlicher Spezialitäten wie Brandschutztüren.
+            Schreinerarbeiten in eigener Werkstatt, inklusive fachlicher Spezialitäten wie Brandschutztüren.
           </p>
         </Reveal>
       </div>
@@ -33,7 +33,7 @@ export default function LeistungenPage() {
   return (
     <>
       <Seo
-        title="Leistungen — Küchen, Möbel & Innenausbau nach Mass"
+        title="Leistungen · Küchen, Möbel & Innenausbau nach Mass"
         description="Alle Leistungen der Dätwyler Küchenbau & Schreinerei AG: Küchen, Badmöbel, Schränke, Möbel, Tische, Türen, Terrassen und Gartenhäuser nach Mass. Tel. 062 751 49 88."
         jsonLd={{
           '@context': 'https://schema.org',

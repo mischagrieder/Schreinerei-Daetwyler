@@ -11,7 +11,7 @@ export const localBusinessJsonLd = {
   '@id': `${SITE_URL}/#business`,
   name: company.name,
   description:
-    'Schreinerei und Küchenbau nach Mass in Strengelbach, Aargau. Küchen, Badmöbel, Schränke, Möbel, Türen, Terrassen und mehr — seit 1989.',
+    'Schreinerei und Küchenbau nach Mass in Strengelbach, Aargau. Küchen, Badmöbel, Schränke, Möbel, Türen, Terrassen und mehr, seit 1989.',
   url: SITE_URL,
   telephone: company.phoneIntl,
   email: company.email,
@@ -55,10 +55,10 @@ export default function Seo({ title, description, image, jsonLd }) {
   const canonical = `${SITE_URL}${pathname === '/' ? '' : pathname}`;
   const fullTitle = title
     ? `${title} | Dätwyler Küchenbau & Schreinerei AG`
-    : 'Dätwyler Küchenbau & Schreinerei AG — Schreinerei in Strengelbach AG';
+    : 'Dätwyler Küchenbau & Schreinerei AG · Schreinerei in Strengelbach AG';
   const desc =
     description ||
-    'Dätwyler Küchenbau & Schreinerei AG in Strengelbach: Küchen, Badmöbel, Schränke, Möbel und Türen nach Mass — seit 1989. Jetzt Offerte anfordern: 062 751 49 88.';
+    'Dätwyler Küchenbau & Schreinerei AG in Strengelbach: Küchen, Badmöbel, Schränke, Möbel und Türen nach Mass, seit 1989. Jetzt Offerte anfordern: 062 751 49 88.';
   const ogImage = image || `${SITE_URL}/images/daetwyler-logo.png`;
 
   return (

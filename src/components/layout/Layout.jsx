@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 import CtaBand from '@/components/CtaBand';
@@ -7,8 +7,12 @@ import MobileCtaBar from '@/components/MobileCtaBar';
 import ChatWidget from '@/components/ChatWidget';
 import { initSmoothScroll, destroySmoothScroll } from '@/lib/smoothScroll';
 
+const HIDE_CTA_ON = ['/jobs'];
+
 export default function Layout() {
   const [chatOpen, setChatOpen] = useState(false);
+  const { pathname } = useLocation();
+  const hideCta = HIDE_CTA_ON.some((p) => pathname === p || pathname.startsWith(`${p}/`));
 
   useEffect(() => {
     initSmoothScroll();
@@ -27,7 +31,7 @@ export default function Layout() {
       <main id="inhalt" className="flex-1">
         <Outlet />
       </main>
-      <CtaBand />
+      {!hideCta && <CtaBand />}
       <Footer />
       <MobileCtaBar onChat={() => setChatOpen(true)} hidden={chatOpen} />
       <ChatWidget open={chatOpen} setOpen={setChatOpen} />

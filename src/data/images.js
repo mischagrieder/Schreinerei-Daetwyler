@@ -33,6 +33,7 @@ export const images = {
   haendeDetail: `${CDN}/hf_20260716_043240_d02ad03b-4589-43e1-995d-73f20d19c82b.png`,
   lehrling: `${CDN}/hf_20260716_043243_5a598ddd-2646-4126-8c28-e0ffd1c8839b.png`,
   beratung: `${CDN}/hf_20260716_043246_6cd8982a-4557-436d-a288-70ada03f24ce.png`,
+  teamGruppenfoto: `${CDN}/hf_20260801_085950_8457cf5f-c778-4e99-8b6b-6cdc93cf5de3.png`,
   // Referenz-/Projektbilder
   projektKuecheInsel: `${CDN}/hf_20260716_193038_307a04cf-92e4-4af4-93b0-739cdb52b007.png`,
   projektBibliothek: `${CDN}/hf_20260716_193040_7f31742a-61b6-4399-9a4f-ac2a066d4c33.png`,

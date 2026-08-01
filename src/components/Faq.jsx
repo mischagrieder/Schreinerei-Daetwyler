@@ -30,12 +30,12 @@ export default function Faq() {
           <SectionHeading
             kicker="Häufige Fragen"
             title="Gut zu wissen"
-            text="Die häufigsten Fragen rund um Offerte, Ablauf und Zusammenarbeit — kurz beantwortet. Ihre Frage ist nicht dabei? Rufen Sie uns an."
+            text="Die häufigsten Fragen rund um Offerte, Ablauf und Zusammenarbeit, kurz beantwortet. Ihre Frage ist nicht dabei? Rufen Sie uns an."
           />
           <Reveal delay={0.1} className="mt-8 hidden rounded-sm bg-secondary p-6 text-white lg:block">
             <p className="font-display text-lg font-extrabold">Lieber direkt fragen?</p>
             <p className="mt-2 text-sm text-white/70">
-              Wir nehmen uns gerne Zeit für Ihr Anliegen — persönlich und unkompliziert.
+              Wir nehmen uns gerne Zeit für Ihr Anliegen, persönlich und unkompliziert.
             </p>
             <div className="mt-5 flex flex-col gap-3 sm:flex-row">
               <Button asChild className="rounded-sm bg-accent font-bold text-white hover:bg-accent/90">

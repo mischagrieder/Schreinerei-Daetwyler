@@ -17,7 +17,7 @@ export default function KontaktPage() {
 
   const submit = (e) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Offertanfrage: ${form.topic} — ${form.name}`);
+    const subject = encodeURIComponent(`Offertanfrage: ${form.topic} · ${form.name}`);
     const body = encodeURIComponent(
       `Name: ${form.name}\nE-Mail: ${form.email}\nTelefon: ${form.phone}\nThema: ${form.topic}\n\n${form.message}`
     );
@@ -27,12 +27,12 @@ export default function KontaktPage() {
   return (
     <>
       <Seo
-        title="Kontakt & Offerte — Schreinerei in Strengelbach"
-        description="Kontaktieren Sie die Dätwyler Küchenbau & Schreinerei AG: Hüssiweg 33, 4802 Strengelbach. Tel. 062 751 49 88 — kostenlose Offerte für Küchen, Möbel und Schreinerarbeiten."
+        title="Kontakt & Offerte · Schreinerei in Strengelbach"
+        description="Kontaktieren Sie die Dätwyler Küchenbau & Schreinerei AG: Hüssiweg 33, 4802 Strengelbach. Tel. 062 751 49 88. Kostenlose Offerte für Küchen, Möbel und Schreinerarbeiten."
         jsonLd={{
           '@context': 'https://schema.org',
           '@type': 'ContactPage',
-          name: 'Kontakt — Dätwyler Küchenbau & Schreinerei AG',
+          name: 'Kontakt · Dätwyler Küchenbau & Schreinerei AG',
           url: 'https://www.daetwyler-schreinerei.ch/kontakt',
           mainEntity: { '@id': 'https://www.daetwyler-schreinerei.ch/#business' },
         }}
@@ -59,7 +59,7 @@ export default function KontaktPage() {
               Reden wir über <span className="text-accent">Ihr Projekt.</span>
             </h1>
             <p className="mt-6 max-w-2xl text-lg text-white/75">
-              Offerte, Beratungstermin oder eine schnelle Frage: Rufen Sie an oder schreiben Sie uns — wir melden uns
+              Offerte, Beratungstermin oder eine schnelle Frage: Rufen Sie an oder schreiben Sie uns. Wir melden uns
               rasch und unkompliziert.
             </p>
           </Reveal>
@@ -143,7 +143,7 @@ export default function KontaktPage() {
             <form onSubmit={submit} className="rounded-sm border border-border bg-white p-8 shadow-sm sm:p-10">
               <h2 className="font-display text-2xl font-extrabold text-foreground">Offerte anfragen</h2>
               <p className="mt-2 text-sm text-muted-foreground">
-                Kostenlos und unverbindlich — wir melden uns in der Regel innerhalb eines Arbeitstags.
+                Kostenlos und unverbindlich. Wir melden uns in der Regel innerhalb eines Arbeitstags.
               </p>
               <div className="mt-8 grid gap-5 sm:grid-cols-2">
                 <div>
@@ -189,7 +189,7 @@ export default function KontaktPage() {
                     value={form.message}
                     onChange={set('message')}
                     className={inputCls}
-                    placeholder="Beschreiben Sie kurz Ihr Vorhaben — z. B. Raummasse, Wünsche, Zeitrahmen …"
+                    placeholder="Beschreiben Sie kurz Ihr Vorhaben, z. B. Raummasse, Wünsche, Zeitrahmen …"
                   />
                 </div>
               </div>
@@ -198,23 +198,90 @@ export default function KontaktPage() {
                 Anfrage senden
               </Button>
               <p className="mt-4 text-xs text-muted-foreground">
-                Die Anfrage öffnet Ihr E-Mail-Programm — Ihre Angaben werden nirgends sonst gespeichert.
+                Die Anfrage öffnet Ihr E-Mail-Programm. Ihre Angaben werden nirgends sonst gespeichert.
               </p>
             </form>
           </Reveal>
         </div>
       </section>
 
-      {/* Karte */}
-      <section aria-label="Anfahrt" className="border-t border-border">
-        <iframe
-          title="Standort der Dätwyler Küchenbau & Schreinerei AG, Hüssiweg 33, 4802 Strengelbach"
-          src={company.mapsEmbed}
-          className="h-[420px] w-full border-0 grayscale-[35%]"
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          allowFullScreen
-        />
+      {/* Ansprechpartner */}
+      <section aria-labelledby="ansprechpartner" className="border-t border-border bg-muted py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl px-6">
+          <Reveal className="mb-12 max-w-2xl">
+            <span className="inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.22em] text-accent">
+              <span className="h-px w-10 bg-accent" aria-hidden="true" />
+              Ihre Ansprechpartner
+            </span>
+            <h2
+              id="ansprechpartner"
+              className="mt-4 font-display text-3xl font-black text-foreground sm:text-4xl"
+            >
+              Wir sind persönlich für Sie da.
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+              Bei uns landen Sie nicht in einer Warteschlange. Diese drei Personen kümmern sich
+              persönlich um Ihre Anfrage. Rufen Sie einfach an oder schreiben Sie uns.
+            </p>
+          </Reveal>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              {
+                name: 'Renate Jost-Dätwyler',
+                role: 'Inhaberin & Geschäftsleitung',
+                task: 'Beratung, Offerten, Aufträge',
+                img: images.beratung,
+              },
+              {
+                name: 'Reto Ischi',
+                role: 'Projektleiter & Planung',
+                task: 'Küchenplanung, Aufmass vor Ort',
+                img: images.haendeDetail,
+              },
+              {
+                name: 'Martin Zimmerli',
+                role: 'Produktion & Montage',
+                task: 'Fragen zur Werkstatt und Ausführung',
+                img: images.werkstattCnc,
+              },
+            ].map((p, i) => (
+              <Reveal
+                key={p.name}
+                delay={i * 0.08}
+                className="group overflow-hidden rounded-sm border border-border bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-xl"
+              >
+                <div className="aspect-[4/5] w-full overflow-hidden bg-secondary/10">
+                  <img
+                    src={min(p.img)}
+                    alt={`${p.name}, ${p.role} bei der Dätwyler Küchenbau & Schreinerei AG`}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+                <div className="p-6">
+                  <h3 className="font-display text-xl font-extrabold text-foreground">{p.name}</h3>
+                  <p className="mt-1 text-sm font-semibold text-accent">{p.role}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{p.task}</p>
+                  <div className="mt-5 flex flex-wrap gap-2">
+                    <a
+                      href={`tel:${company.phoneIntl}`}
+                      className="inline-flex items-center gap-2 rounded-sm bg-accent px-3.5 py-2 text-xs font-bold text-white transition-colors hover:bg-accent/90"
+                    >
+                      <Phone size={13} aria-hidden="true" /> Anrufen
+                    </a>
+                    <a
+                      href={`mailto:${company.email}`}
+                      className="inline-flex items-center gap-2 rounded-sm border border-border px-3.5 py-2 text-xs font-bold text-foreground transition-colors hover:border-accent hover:text-accent"
+                    >
+                      <Mail size={13} aria-hidden="true" /> E-Mail
+                    </a>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
       </section>
     </>
   );
