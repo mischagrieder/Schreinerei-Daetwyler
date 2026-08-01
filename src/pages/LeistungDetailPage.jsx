@@ -65,8 +65,7 @@ export default function LeistungDetailPage() {
         <div className="grid gap-14 lg:grid-cols-[1.4fr,1fr]">
           <div>
             <Reveal>
-              <span className="inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] text-accent">
-                <span className="h-px w-8 bg-accent" aria-hidden="true" />
+              <span className="inline-block text-xs font-bold uppercase tracking-[0.24em] text-accent">
                 {leistung.kicker}
               </span>
               <p className="mt-5 text-lg leading-relaxed text-foreground/85">{leistung.description}</p>

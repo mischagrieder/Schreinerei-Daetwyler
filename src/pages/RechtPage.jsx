@@ -11,8 +11,7 @@ function LegalLayout({ kicker, title, children }) {
       <section className="bg-secondary pb-14 pt-40 text-white lg:pt-44">
         <div className="mx-auto max-w-7xl px-6">
           <Reveal>
-            <span className="inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.22em] text-white/80">
-              <span className="h-px w-10 bg-accent" aria-hidden="true" />
+            <span className="inline-block text-xs font-bold uppercase tracking-[0.24em] text-accent">
               {kicker}
             </span>
             <h1 className="mt-5 max-w-3xl font-display text-4xl font-black leading-[1.05] sm:text-5xl">{title}</h1>

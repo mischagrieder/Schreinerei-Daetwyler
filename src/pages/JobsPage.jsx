@@ -29,9 +29,8 @@ export default function JobsPage() {
         </div>
         <div className="relative mx-auto w-full max-w-7xl px-6 pb-16">
           <Reveal>
-            <span className="inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.22em] text-white/80">
-              <span className="h-px w-10 bg-accent" aria-hidden="true" />
-              Jobs & Lehre
+            <span className="inline-block text-xs font-bold uppercase tracking-[0.24em] text-accent">
+              Jobs &amp; Lehre
             </span>
             <h1 className="mt-5 max-w-3xl font-display text-4xl font-black leading-[1.05] text-white sm:text-5xl lg:text-6xl">
               Arbeite dort, wo <span className="text-accent">Handwerk</span> noch zählt.

@@ -32,7 +32,7 @@ function ProjekteHero({ total }) {
               <br />
               die man
               <br />
-              <span className="italic text-accent">anfassen kann.</span>
+              <span className="text-accent">anfassen kann.</span>
             </h1>
             <p className="mt-8 max-w-lg text-base leading-relaxed text-muted-foreground sm:text-lg">
               Küchen, Schränke, Möbel und Innenausbauten aus Strengelbach und der Region. Bewegen Sie den
@@ -96,7 +96,7 @@ function FilterBar({ filter, setFilter, counts }) {
                 {k.label}
                 <span
                   className={cn(
-                    'inline-block rounded-full px-1.5 py-0.5 text-[0.6rem] font-mono font-bold',
+                    'inline-block rounded-full px-1.5 py-0.5 text-[0.6rem] font-display font-bold tabular-nums',
                     isActive ? 'bg-background/20 text-background' : 'bg-muted text-muted-foreground'
                   )}
                 >
