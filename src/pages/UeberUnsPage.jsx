@@ -31,7 +31,7 @@ function HeroSection() {
               <h1 className="mt-8 font-display text-4xl font-black leading-[0.96] tracking-[-0.02em] text-foreground sm:text-6xl lg:text-[4.5rem]">
                 Ein Familienbetrieb
                 <br />
-                in zweiter Generation.
+                in zweiter <span className="text-accent">Generation.</span>
               </h1>
               <p className="mt-8 max-w-lg text-base leading-relaxed text-muted-foreground sm:text-lg">
                 Was Walter Dätwyler 1989 als Ein-Mann-Betrieb für Küchen-Innenausbau gründete, führt
@@ -41,10 +41,10 @@ function HeroSection() {
             </Reveal>
           </div>
 
-          <Reveal delay={0.15} className="mt-14 grid grid-cols-3 gap-6 border-t border-border pt-8">
+          <Reveal delay={0.15} className="mt-14 grid grid-cols-3 gap-6 border-t-2 border-accent pt-8">
             {stats.slice(0, 3).map((s) => (
               <div key={s.label}>
-                <p className="font-display text-3xl font-black tracking-tight text-foreground sm:text-4xl">
+                <p className="font-display text-3xl font-black tracking-tight text-accent sm:text-4xl">
                   {s.value}
                 </p>
                 <p className="mt-2 text-[0.7rem] font-bold uppercase tracking-[0.18em] text-muted-foreground">
@@ -160,11 +160,8 @@ function GeschichteSection() {
                   <span className="shrink-0 font-display text-4xl font-black tracking-tight text-foreground transition-colors duration-300 group-hover:text-accent sm:text-5xl">
                     {h.year}
                   </span>
-                  <div className="flex-1">
-                    <p className="text-[0.65rem] font-bold uppercase tracking-[0.22em] text-muted-foreground">
-                      No. {String(i + 1).padStart(2, '0')}
-                    </p>
-                    <p className="mt-2 text-base leading-relaxed text-foreground/85">{h.event}</p>
+                  <div className="flex-1 pt-1">
+                    <p className="text-base leading-relaxed text-foreground/85">{h.event}</p>
                   </div>
                 </article>
               </Reveal>
@@ -274,21 +271,13 @@ function TeamSection() {
   return (
     <section id="team" className="relative border-t border-border bg-background py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6">
-        <div className="mb-14 grid gap-8 lg:grid-cols-[1fr,1.4fr] lg:gap-24">
-          <div>
-            <p className="text-[0.7rem] font-bold uppercase tracking-[0.28em] text-accent">
-              Das Team
-            </p>
-            <h2 className="mt-6 max-w-2xl font-display text-3xl font-extrabold leading-[1.05] tracking-[-0.02em] text-foreground sm:text-4xl lg:text-5xl">
-              13 Menschen, ein Handwerk.
-            </h2>
-          </div>
-          <Reveal>
-            <p className="max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-              Vom 30-Jahre-Jubilar bis zur Lernenden im zweiten Lehrjahr. Fahren Sie mit der Maus über
-              einen Namen und lernen Sie die Person dahinter kennen.
-            </p>
-          </Reveal>
+        <div className="mb-14">
+          <p className="text-[0.7rem] font-bold uppercase tracking-[0.28em] text-accent">
+            Das Team
+          </p>
+          <h2 className="mt-6 max-w-2xl font-display text-3xl font-extrabold leading-[1.05] tracking-[-0.02em] text-foreground sm:text-4xl lg:text-5xl">
+            13 Menschen, ein <span className="text-accent">Handwerk.</span>
+          </h2>
         </div>
 
         <Reveal className="mb-12 overflow-hidden rounded-sm bg-secondary">
