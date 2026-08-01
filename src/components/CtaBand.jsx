@@ -21,8 +21,6 @@ export default function CtaBand() {
           <p className="text-xs font-bold uppercase tracking-[0.2em] text-white/80">Kostenlos & unverbindlich</p>
           <h2 id="cta-heading" className="mt-3 font-display text-3xl font-extrabold leading-tight text-white sm:text-4xl lg:text-5xl">
             Haben Sie ein Projekt im Kopf?
-            <br />
-            Wir machen es aus Holz.
           </h2>
           <p className="mt-4 max-w-xl text-white/85">
             Erzählen Sie uns von Ihrer Idee. Wir beraten Sie persönlich und erstellen Ihnen eine transparente Offerte.
