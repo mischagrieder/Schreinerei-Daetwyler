@@ -12,6 +12,8 @@ import {
   Award,
   Users,
   Handshake,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Seo, { localBusinessJsonLd } from '@/components/Seo';
@@ -252,98 +254,76 @@ const leistungHeading = (
 const GUTTER = 'w-[max(1.5rem,calc((100vw-80rem)/2+1.5rem))]';
 
 function LeistungenGrid() {
-  const sectionRef = useRef(null);
   const trackRef = useRef(null);
-  const [reduce, setReduce] = useState(false);
+  const [canPrev, setCanPrev] = useState(false);
+  const [canNext, setCanNext] = useState(true);
 
+  // Sichtbarkeit der Pfeile berechnen und bei Scroll aktualisieren.
   useEffect(() => {
-    setReduce(window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false);
+    const el = trackRef.current;
+    if (!el) return;
+    const update = () => {
+      setCanPrev(el.scrollLeft > 8);
+      setCanNext(el.scrollLeft + el.clientWidth < el.scrollWidth - 8);
+    };
+    update();
+    el.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    return () => {
+      el.removeEventListener('scroll', update);
+      window.removeEventListener('resize', update);
+    };
   }, []);
 
-  useEffect(() => {
-    if (reduce) return;
-    const section = sectionRef.current;
-    const track = trackRef.current;
-    if (!section || !track) return;
-    let raf = 0;
-    let currentX = 0; // aktuell angezeigte Position
-    let targetX = 0;  // Ziel aus dem Scroll-Fortschritt
-
-    // Zielposition direkt aus dem vertikalen Scroll-Fortschritt ableiten.
-    const computeTarget = () => {
-      const vh = window.innerHeight;
-      const maxX = Math.max(track.scrollWidth - window.innerWidth, 0);
-      const total = section.offsetHeight - vh;
-      const top = section.getBoundingClientRect().top;
-      const scrolled = Math.min(Math.max(-top, 0), Math.max(total, 0));
-      const progress = total > 0 ? scrolled / total : 0;
-      return -progress * maxX;
-    };
-
-    // Sanftes Nachgleiten: currentX nähert sich pro Frame dem Ziel (Lerp),
-    // dadurch fliesst die Bewegung beim Loslassen weich aus statt hart zu stoppen.
-    const render = () => {
-      const diff = targetX - currentX;
-      if (Math.abs(diff) < 0.4) {
-        currentX = targetX;
-        track.style.transform = `translate3d(${currentX}px,0,0)`;
-        raf = 0;
-        return;
-      }
-      currentX += diff * 0.085;
-      track.style.transform = `translate3d(${currentX}px,0,0)`;
-      raf = requestAnimationFrame(render);
-    };
-
-    const onScroll = () => {
-      targetX = computeTarget();
-      if (!raf) raf = requestAnimationFrame(render);
-    };
-    const measure = () => {
-      const maxX = Math.max(track.scrollWidth - window.innerWidth, 0);
-      section.style.height = `${Math.round(window.innerHeight + maxX)}px`;
-      // Bei Layout-Änderungen ohne Nachgleiten direkt an die richtige Stelle setzen.
-      targetX = computeTarget();
-      currentX = targetX;
-      track.style.transform = `translate3d(${currentX}px,0,0)`;
-    };
-
-    measure();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', measure);
-    const t1 = setTimeout(measure, 300);
-    const t2 = setTimeout(measure, 1200);
-    return () => {
-      window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', measure);
-      cancelAnimationFrame(raf);
-      clearTimeout(t1);
-      clearTimeout(t2);
-    };
-  }, [reduce]);
-
-  // Fallback bei „reduzierter Bewegung": normaler horizontaler Wisch-Scroller.
-  if (reduce) {
-    return (
-      <section className="bg-secondary py-14 lg:py-20">
-        <div className="mx-auto max-w-7xl px-6">{leistungHeading}</div>
-        <div className="flex snap-x snap-mandatory gap-5 overflow-x-auto px-6 pb-4">
-          {leistungen.map((l) => (
-            <LeistungCard key={l.slug} l={l} className="snap-start" />
-          ))}
-        </div>
-      </section>
-    );
-  }
+  // Ein Karten-Breiten-Schritt pro Klick.
+  const scrollBy = (dir) => {
+    const el = trackRef.current;
+    if (!el) return;
+    const first = el.querySelector('[data-card]');
+    const step = first ? first.getBoundingClientRect().width + 20 : el.clientWidth * 0.8;
+    el.scrollBy({ left: dir * step, behavior: 'smooth' });
+  };
 
   return (
-    <section ref={sectionRef} className="relative bg-secondary">
-      <div className="sticky top-0 flex h-screen flex-col justify-center gap-8 overflow-hidden py-12">
-        <div className="mx-auto w-full max-w-7xl px-6">{leistungHeading}</div>
-        <div ref={trackRef} className="flex will-change-transform">
+    <section className="relative bg-secondary py-14 lg:py-20">
+      <div className="mx-auto w-full max-w-7xl px-6">{leistungHeading}</div>
+
+      <div className="relative mt-4">
+        {/* Pfeile: nur auf Desktop sichtbar */}
+        <button
+          type="button"
+          onClick={() => scrollBy(-1)}
+          aria-label="Vorherige Leistung"
+          disabled={!canPrev}
+          className={`absolute left-4 top-1/2 z-10 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white text-secondary shadow-xl transition-all duration-200 lg:flex ${
+            canPrev ? 'opacity-100 hover:bg-accent hover:text-white' : 'pointer-events-none opacity-0'
+          }`}
+        >
+          <ChevronLeft size={22} />
+        </button>
+        <button
+          type="button"
+          onClick={() => scrollBy(1)}
+          aria-label="Nächste Leistung"
+          disabled={!canNext}
+          className={`absolute right-4 top-1/2 z-10 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full bg-white text-secondary shadow-xl transition-all duration-200 lg:flex ${
+            canNext ? 'opacity-100 hover:bg-accent hover:text-white' : 'pointer-events-none opacity-0'
+          }`}
+        >
+          <ChevronRight size={22} />
+        </button>
+
+        {/* Scroll-Track: native touch-swipe auf Mobile, snap-Points, keine Scrollbar */}
+        <div
+          ref={trackRef}
+          className="scrollbar-hide flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth pb-6"
+          style={{ scrollPaddingLeft: '1.5rem', scrollPaddingRight: '1.5rem' }}
+        >
           <div className={`shrink-0 ${GUTTER}`} aria-hidden="true" />
           {leistungen.map((l) => (
-            <LeistungCard key={l.slug} l={l} className="mr-5" />
+            <div key={l.slug} data-card className="snap-start">
+              <LeistungCard l={l} />
+            </div>
           ))}
           <div className={`shrink-0 ${GUTTER}`} aria-hidden="true" />
         </div>
