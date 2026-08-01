@@ -45,6 +45,10 @@ html.lenis, html.lenis body {
   html { scroll-behavior: auto; }
 }
 
+/* Scrollleiste in horizontalen Filter- und Thumbnail-Strips ausblenden */
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+
 /*
   ---break---
 */
