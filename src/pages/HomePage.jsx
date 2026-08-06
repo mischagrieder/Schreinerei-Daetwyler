@@ -51,9 +51,9 @@ function Hero() {
             Küchenbau &amp; Schreinerei · seit 1989
           </span>
           <h1 className="mt-6 font-display text-4xl font-black leading-[1.02] text-white sm:text-6xl lg:text-7xl">
-            Handwerk,
+            Ihr
             <br />
-            das <span className="text-accent">bleibt.</span>
+            <span className="text-accent">Qualitätsschreiner.</span>
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/80">
             Massgefertigte Küchen, Möbel und Innenausbauten, mit höchster Präzision geplant, gefertigt
